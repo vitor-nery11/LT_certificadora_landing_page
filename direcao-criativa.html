@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direção Criativa · LT Certificadora</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --fundo:#F4F7F5;      /* Branco Folha: fundo claro principal */
+  --tinta:#111827;      /* Grafite Profundo: cor do texto */
+  --escuro:#131B3A;     /* Marinho Certificação: fundo escuro da direção */
+  --destaque:#2E7D47;   /* Verde LT: cor de ação e destaque */
+  --azul-lt:#44509C;    /* Azul Institucional da logo LT */
+  --sol-lt:#E8B040;     /* Ouro Solar do centro da logo LT */
+  --apoio:#52606D;      /* Texto secundário e rótulos */
+  --fio:rgba(17,24,39,.14);
+  --fonte-titulo:"Bricolage Grotesque",system-ui,sans-serif;
+  --fonte-texto:"Public Sans",system-ui,sans-serif;
+  --peso-titulo:600;
+  --aperto-titulo:-.03em;
+  --raio:20px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#DFE5E1;font-family:var(--fonte-texto);color:var(--tinta);padding:32px 16px;-webkit-font-smoothing:antialiased}
+.deck{display:grid;gap:28px;max-width:1600px;margin:0 auto}
+
+/* Cada slide é 16:9 e escala inteiro com a largura (unidade cqw). */
+.slide{container-type:inline-size;aspect-ratio:16/9;background:var(--fundo);overflow:hidden;position:relative}
+.dentro{position:absolute;inset:0;padding:4.2cqw 5cqw;display:flex;flex-direction:column;font-size:1.15cqw;line-height:1.5}
+.slide.escuro{background:var(--escuro);color:#F4F7F5;--fio:rgba(244,247,245,.18);--apoio:rgba(244,247,245,.72)}
+.slide.cor{background:var(--destaque);color:#F4F7F5;--fio:rgba(244,247,245,.28);--apoio:rgba(244,247,245,.82)}
+
+.topo{display:flex;justify-content:space-between;align-items:center;padding-bottom:1.4cqw;border-bottom:1px solid var(--fio);font-size:.82cqw;letter-spacing:.22em;text-transform:uppercase;color:var(--apoio)}
+.topo span:first-child{display:flex;align-items:center;gap:.9cqw;color:var(--destaque);font-weight:600}
+.topo span:first-child::before{content:"";width:1.1cqw;height:.28cqw;background:currentColor;border-radius:999px}
+.escuro .topo span:first-child{color:var(--sol-lt)}
+.cor .topo span:first-child{color:#fff}
+
+h1,h2{font-family:var(--fonte-titulo);font-weight:var(--peso-titulo);letter-spacing:var(--aperto-titulo);line-height:1.02}
+h1{font-size:7.2cqw}
+h2{font-size:4.2cqw;margin-top:2.6cqw;max-width:68cqw}
+.gigante{font-size:5.8cqw;max-width:82cqw}
+.acento{color:var(--destaque)}
+.escuro .acento{color:var(--sol-lt)}
+.cor .acento{color:var(--sol-lt)}
+.apoio{color:var(--apoio);max-width:46cqw;margin-top:1.4cqw;font-size:1.22cqw}
+.base{margin-top:auto}
+.rotulo{font-size:.78cqw;letter-spacing:.2em;text-transform:uppercase;color:var(--apoio);font-weight:600}
+
+/* colunas numeradas, separadas por fio */
+.colunas{display:grid;grid-template-columns:repeat(var(--n,3),1fr);gap:2.4cqw}
+.colunas>div{border-top:1px solid var(--fio);padding-top:1.2cqw}
+.colunas b{display:block;font-family:var(--fonte-titulo);font-weight:var(--peso-titulo);font-size:1.45cqw;letter-spacing:-.01em;margin:.45cqw 0 .3cqw}
+.colunas .num{color:var(--destaque);font-size:1.2cqw;font-weight:600}
+.escuro .colunas .num,.cor .colunas .num{color:var(--sol-lt)}
+.colunas p{color:var(--apoio);font-size:1cqw}
+
+/* capa */
+.capa-marca{display:flex;align-items:center;gap:1.4cqw;margin-top:auto}
+.capa-marca img{height:5.4cqw;width:auto;background:#fff;padding:.6cqw .9cqw;border-radius:1.1cqw}
+.capa .rodape{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid var(--fio);padding-top:1.4cqw;font-size:1cqw;color:var(--apoio)}
+
+/* cores */
+.cores{display:grid;grid-template-columns:repeat(6,1fr);gap:1.2cqw;flex:1;margin-top:2.6cqw;min-height:0}
+.cores>div{display:flex;flex-direction:column;min-height:0}
+.cores i{flex:1;border-radius:var(--raio);border:1px solid var(--fio)}
+.cores .maior{grid-column:span 2}
+.cores b{font-weight:600;font-size:1.02cqw;margin-top:.85cqw;display:flex;justify-content:space-between}
+.cores b span{color:var(--apoio);font-weight:400;letter-spacing:.04em}
+.cores p{font-size:.74cqw;letter-spacing:.16em;text-transform:uppercase;color:var(--apoio);margin-top:.2cqw}
+
+/* tipografia */
+.tipo{display:grid;grid-template-columns:1.22fr 1fr;gap:4.5cqw;flex:1;margin-top:2.4cqw;min-height:0}
+.tipo .amostra{font-family:var(--fonte-titulo);font-weight:var(--peso-titulo);letter-spacing:var(--aperto-titulo);line-height:.98;font-size:4.7cqw}
+.tipo .Aa{font-family:var(--fonte-titulo);font-weight:var(--peso-titulo);font-size:7.6cqw;line-height:1;letter-spacing:var(--aperto-titulo);color:var(--destaque)}
+.tipo .texto{font-family:var(--fonte-texto);font-size:1.18cqw;max-width:34cqw;margin-top:1.4cqw;color:var(--apoio)}
+.ficha{display:grid;gap:0;margin-top:auto}
+.ficha div{display:grid;grid-template-columns:9.5cqw 1fr;border-top:1px solid var(--fio);padding:.72cqw 0;font-size:.98cqw}
+.ficha div span:first-child{font-size:.76cqw;letter-spacing:.18em;text-transform:uppercase;color:var(--apoio);padding-top:.12cqw;font-weight:600}
+
+/* moodboard: mosaico com as 4 referências da pessoa */
+.mood{display:grid;grid-template-columns:1.05fr 1.95fr;gap:3.6cqw;flex:1;margin-top:2.2cqw;min-height:0}
+.mood h2{margin-top:0;font-size:3.4cqw;max-width:none}
+.mood .lista{margin-top:auto;display:grid}
+.mood .lista div{border-top:1px solid var(--fio);padding:.75cqw 0;font-size:.98cqw}
+.mood .lista span{display:block;font-size:.74cqw;letter-spacing:.18em;text-transform:uppercase;color:var(--sol-lt);font-weight:600;margin-bottom:.15cqw}
+.mosaico{display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(4,1fr);gap:.75cqw;min-height:0}
+.mosaico figure{overflow:hidden;border-radius:1.1cqw;background:rgba(255,255,255,.08);position:relative;min-height:0;border:1px solid rgba(255,255,255,.14)}
+.mosaico img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.mosaico figcaption{position:absolute;left:.6cqw;bottom:.6cqw;background:var(--escuro);color:#fff;font-size:.7cqw;letter-spacing:.14em;text-transform:uppercase;padding:.28cqw .6cqw;border-radius:999px}
+/* Arranjo exato para preencher a grade 6x4 com as 4 referências */
+.mosaico figure:nth-child(1){grid-column:span 3;grid-row:span 4}
+.mosaico figure:nth-child(2){grid-column:span 3;grid-row:span 2}
+.mosaico figure:nth-child(3){grid-column:span 2;grid-row:span 2}
+.mosaico figure:nth-child(4){grid-column:span 1;grid-row:span 2}
+
+/* assinatura aplicada: simulação visual + pares */
+.assinatura-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:3.6cqw;margin-top:2.2cqw;flex:1;min-height:0;align-items:stretch}
+.simulacao{background:var(--escuro);color:#F4F7F5;border-radius:var(--raio);padding:2.2cqw;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.simulacao-tag{display:inline-flex;align-items:center;gap:.55cqw;background:rgba(232,176,64,.16);color:var(--sol-lt);border:1px solid rgba(232,176,64,.4);padding:.35cqw .85cqw;border-radius:999px;font-size:.74cqw;letter-spacing:.14em;text-transform:uppercase;width:fit-content;font-weight:600}
+.simulacao-tag i{width:.55cqw;height:.55cqw;border-radius:50%;background:var(--sol-lt);display:inline-block}
+.simulacao h3{font-family:var(--fonte-titulo);font-size:2.35cqw;line-height:1.06;letter-spacing:-.02em;margin-top:1cqw;max-width:28cqw}
+.simulacao-cartao{margin-top:auto;background:#F4F7F5;color:var(--tinta);border-radius:1.1cqw;padding:1.1cqw 1.3cqw;display:flex;align-items:center;justify-content:space-between;gap:1.2cqw}
+.simulacao-cartao img{height:2.4cqw;width:auto}
+.simulacao-cartao div b{display:block;font-size:.98cqw;font-family:var(--fonte-titulo)}
+.simulacao-cartao div span{font-size:.82cqw;color:var(--apoio)}
+.simulacao-selo{background:var(--destaque);color:#fff;font-size:.74cqw;font-weight:600;padding:.4cqw .8cqw;border-radius:999px;text-transform:uppercase;letter-spacing:.1em}
+.pares{display:grid;grid-template-columns:1fr;gap:1.6cqw;align-content:space-between}
+.pares ul{list-style:none}
+.pares li{border-top:1px solid var(--fio);padding:.68cqw 0;font-size:1.02cqw;display:flex;gap:.9cqw}
+.pares li::before{content:"+";color:var(--destaque);font-weight:600}
+.pares .fora li{color:var(--apoio)}
+.pares .fora li::before{content:"×";color:var(--apoio)}
+.pares .rotulo{margin-bottom:.5cqw}
+
+/* direcionamento de assets */
+.assets{display:grid;grid-template-columns:repeat(2,1fr);margin-top:auto;border-top:1px solid var(--fio);border-left:1px solid var(--fio)}
+.assets div{border-right:1px solid var(--fio);border-bottom:1px solid var(--fio);padding:1.25cqw 1.5cqw 1.4cqw}
+.assets span{font-size:.76cqw;letter-spacing:.18em;text-transform:uppercase;color:var(--destaque);font-weight:600}
+.assets b{display:block;font-family:var(--fonte-titulo);font-weight:var(--peso-titulo);font-size:1.4cqw;margin:.45cqw 0 .2cqw}
+.assets p{color:var(--apoio);font-size:.96cqw}
+.assets-fora{margin-top:1cqw;font-size:.96cqw;color:var(--apoio)}
+
+/* estrutura */
+.estrutura{display:grid;grid-template-columns:repeat(4,1fr);margin-top:auto;border-top:1px solid var(--fio);border-left:1px solid var(--fio)}
+.estrutura div{border-right:1px solid var(--fio);border-bottom:1px solid var(--fio);padding:1.15cqw 1.3cqw 1.35cqw}
+.estrutura .largo{grid-column:span 2}
+.estrutura .num{color:var(--destaque);font-size:1.1cqw;font-weight:600}
+.estrutura b{display:block;font-family:var(--fonte-titulo);font-weight:var(--peso-titulo);font-size:1.28cqw;margin:.4cqw 0 .2cqw}
+.estrutura p{color:var(--apoio);font-size:.92cqw}
+
+/* salvar como PDF: uma página por slide */
+@page{size:1600px 900px;margin:0}
+@media print{
+  body{background:none;padding:0}
+  .deck{gap:0;max-width:none}
+  .slide{width:1600px;height:900px;aspect-ratio:auto;break-after:page;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<main class="deck">
+
+<!-- 01 CAPA -->
+<section class="slide escuro capa"><div class="dentro">
+  <div class="topo"><span>Apresentação de direção</span><span>2026</span></div>
+  <div class="capa-marca">
+    <img src="logo_lt.png" alt="Logo LT Certificadora">
+    <h1>Direção<br>Criativa<span class="acento">.</span></h1>
+  </div>
+  <div class="rodape" style="margin-top:2.6cqw"><span>Landing Page · LT Certificadora</span><span>Sua identidade digital pronta sem sair da rotina.</span></div>
+</div></section>
+
+<!-- 02 OBJETIVO -->
+<section class="slide"><div class="dentro">
+  <div class="topo"><span>Objetivo</span><span>02 / 10</span></div>
+  <h2>Transformar obrigação fiscal em <span class="acento">agendamento rápido no WhatsApp.</span></h2>
+  <p class="apoio">Para pessoas físicas e empresas que precisam emitir ou renovar certificados A1 e A3 sem fila nem burocracia.</p>
+  <div class="colunas base" style="--n:3">
+    <div><span class="num">01</span><b>Clareza imediata</b><p>Separar A1 PF, A1 PJ, A3 PF e A3 PJ sem jargão técnico.</p></div>
+    <div><span class="num">02</span><b>Confiança oficial</b><p>Mostrar validade ICP-Brasil somada ao suporte humano real.</p></div>
+    <div><span class="num">03</span><b>Ação única</b><p>Levar direto ao WhatsApp da equipe para agendar a videoconferência.</p></div>
+  </div>
+</div></section>
+
+<!-- 03 CONCEITO -->
+<section class="slide cor"><div class="dentro">
+  <div class="topo"><span>Conceito criativo</span><span>03 / 10</span></div>
+  <h2 class="gigante" style="margin-top:auto">Sua identidade digital pronta<br>sem sair da rotina<span class="acento">.</span></h2>
+  <div class="colunas" style="--n:4;margin-top:4cqw">
+    <div><span class="rotulo">01</span><b>Segura</b></div>
+    <div><span class="rotulo">02</span><b>Descomplicada</b></div>
+    <div><span class="rotulo">03</span><b>Ágil</b></div>
+    <div><span class="rotulo">04</span><b>Humana</b></div>
+  </div>
+</div></section>
+
+<!-- 04 MOODBOARD -->
+<section class="slide escuro"><div class="dentro">
+  <div class="topo"><span>Atmosfera e referências</span><span>04 / 10</span></div>
+  <div class="mood">
+    <div style="display:flex;flex-direction:column">
+      <h2>Autoridade escura<br>no topo e leitura<br>leve no corpo.</h2>
+      <div class="lista">
+        <div><span>01 · Abertura e ritmo</span>Fundo profundo de segurança abrindo para seções claras e arejadas.</div>
+        <div><span>02 · Formas acolhedoras</span>Cantos arredondados e botões em pílula com ícone circular na ponta.</div>
+        <div><span>03 · Serviço tangível</span>Cartões visuais comparáveis para diferenciar Pessoa Física e Jurídica.</div>
+      </div>
+    </div>
+    <div class="mosaico">
+      <figure><img src="referencias/ref-1.jpg" alt="Referência Havenly"><figcaption>01 · Havenly</figcaption></figure>
+      <figure><img src="referencias/ref-4.jpg" alt="Referência Paymint"><figcaption>02 · Paymint</figcaption></figure>
+      <figure><img src="referencias/ref-3.jpg" alt="Referência Paynex"><figcaption>03 · Paynex</figcaption></figure>
+      <figure><img src="referencias/ref-2.jpg" alt="Referência Finovate"><figcaption>04 · Finovate</figcaption></figure>
+    </div>
+  </div>
+</div></section>
+
+<!-- 05 CORES -->
+<section class="slide"><div class="dentro">
+  <div class="topo"><span>Cores</span><span>05 / 10</span></div>
+  <h2>As cores da logo organizando confiança e ação.</h2>
+  <div class="cores">
+    <div class="maior"><i style="background:var(--fundo)"></i><b>Branco Folha <span>#F4F7F5</span></b><p>Fundo principal de leitura (60%)</p></div>
+    <div><i style="background:var(--escuro)"></i><b>Marinho LT <span>#131B3A</span></b><p>Abertura e fechamento</p></div>
+    <div><i style="background:var(--destaque)"></i><b>Verde LT <span>#2E7D47</span></b><p>Botão principal e ação</p></div>
+    <div><i style="background:var(--azul-lt)"></i><b>Azul LT <span>#44509C</span></b><p>Credenciais e apoio PJ</p></div>
+    <div><i style="background:var(--sol-lt)"></i><b>Ouro Solar <span>#E8B040</span></b><p>Selo de validação ativa</p></div>
+  </div>
+</div></section>
+
+<!-- 06 TIPOGRAFIA E SISTEMA -->
+<section class="slide"><div class="dentro">
+  <div class="topo"><span>Tipografia e sistema</span><span>06 / 10</span></div>
+  <div class="tipo">
+    <div style="display:flex;flex-direction:column">
+      <p class="amostra">Emita seu certificado por videoconferência sem fila.</p>
+      <p class="texto">Certificados e-CPF e e-CNPJ nos modelos A1 e A3 com validade jurídica em todo o Brasil e conferência prévia pelo WhatsApp.</p>
+    </div>
+    <div style="display:flex;flex-direction:column">
+      <div class="Aa">Aa</div>
+      <div class="ficha">
+        <div><span>Títulos</span><span>Bricolage Grotesque 600, aperto -0.03em</span></div>
+        <div><span>Texto</span><span>Public Sans 400 e 600, corpo 17px (1.0625rem)</span></div>
+        <div><span>Grid</span><span>Ponta a ponta (100% da tela), 12 colunas fluidas</span></div>
+        <div><span>Formas</span><span>Raio único de 20px em cartões e 999px em botões</span></div>
+        <div><span>Imagem</span><span>Foto de abertura em fundo de tela cheia com véu escuro</span></div>
+        <div><span>Movimento</span><span>Entrada por linhas no topo e passos presos na rolagem</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 07 ASSINATURA APLICADA -->
+<section class="slide"><div class="dentro">
+  <div class="topo"><span>Assinatura aplicada</span><span>07 / 10</span></div>
+  <h2>O Cartão de Validação Solar sobre a cena humana.</h2>
+  <div class="assinatura-grid">
+    <div class="simulacao" aria-label="Simulação visual da assinatura">
+      <span class="simulacao-tag"><i></i> Simulação da assinatura na abertura</span>
+      <h3>Emita ou renove por videoconferência com suporte humano.</h3>
+      <div class="simulacao-cartao">
+        <img src="logo_lt.png" alt="Logo LT">
+        <div>
+          <b>Validação por Videoconferência · ICP-Brasil</b>
+          <span>e-CPF e e-CNPJ · Modelos A1 e A3</span>
+        </div>
+        <span class="simulacao-selo">Atendimento humano</span>
+      </div>
+    </div>
+    <div class="pares">
+      <div><p class="rotulo">O que sustenta a direção</p><ul>
+        <li>Selo flutuante com luz dourada do sol da logo sobre foto real</li>
+        <li>Quatro cartões-credenciais tangíveis para A1 PF, A1 PJ, A3 PF e A3 PJ</li>
+        <li>Alternância entre marinho profundo e fundo claro descomplicado</li>
+      </ul></div>
+      <div class="fora"><p class="rotulo">O que fica de fora</p><ul>
+        <li>Tabelas quadradas com aparência de sistema antigo do governo</li>
+        <li>Formulários longos ou robôs antes de falar no WhatsApp</li>
+        <li>Cadeados 3D neon ou ilustrações genéricas de banco de imagem</li>
+      </ul></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 08 DIRECIONAMENTO DE ASSETS -->
+<section class="slide"><div class="dentro">
+  <div class="topo"><span>Direcionamento de assets</span><span>08 / 10</span></div>
+  <h2>Materializar o certificado invisível e mostrar quem atende.</h2>
+  <div class="assets">
+    <div><span>01 · Protagonista · Fotografia</span><b>Atendimento real por videoconferência</b><p>Na abertura: foto panorâmica de fundo ocupando a tela de ponta a ponta.</p></div>
+    <div><span>02 · Elemento gráfico</span><b>Quatro credenciais visuais A1 e A3</b><p>Na seção de certificados: cartões gráficos diferenciando arquivo digital e mídia física.</p></div>
+    <div><span>03 · Elemento de assinatura</span><b>Selo Solar de Validação ICP-Brasil</b><p>Sobre a abertura: tarjeta flutuante com o sol dourado da marca LT.</p></div>
+    <div><span>04 · Ícones em traço</span><b>Conjunto enxuto de 4 ícones geométricos</b><p>Nos pilares de segurança e passos: traço contínuo de 2px em verde e dourado.</p></div>
+  </div>
+  <p class="assets-fora">Fica de fora: ilustrações 3D abstratas de cadeados ou redes cibernéticas, que esfriam a relação humana.</p>
+</div></section>
+
+<!-- 09 ESTRUTURA DA PÁGINA -->
+<section class="slide"><div class="dentro">
+  <div class="topo"><span>Estrutura da página</span><span>09 / 10</span></div>
+  <h2>Sete seções de ponta a ponta guiando ao WhatsApp.</h2>
+  <div class="estrutura">
+    <div><span class="num">01</span><b>Abertura em Tela Cheia</b><p>Imagem de fundo de ponta a ponta, véu marinho, título em linhas e selo solar.</p></div>
+    <div><span class="num">02</span><b>Os 4 Certificados</b><p>Grade ampla de ponta a ponta com 4 cartões-credenciais (A1 PF, A1 PJ, A3 PF, A3 PJ).</p></div>
+    <div><span class="num">03</span><b>Comparativo A1 ou A3</b><p>Painel largo contrastando local de guarda, validade e rotina de uso.</p></div>
+    <div><span class="num">04</span><b>Como Funciona</b><p>Painel preso à esquerda enquanto os 3 passos da videoconferência rolam à direita.</p></div>
+    <div><span class="num">05</span><b>Segurança e Confiança</b><p>Imagem revelada por cortina suave ao lado dos 4 pilares oficiais ICP-Brasil.</p></div>
+    <div><span class="num">06</span><b>Perguntas Frequentes</b><p>Coluna de chamada à esquerda e 4 respostas com abertura suave à direita.</p></div>
+    <div class="largo"><span class="num">07</span><b>Chamada Final e Rodapé</b><p>Bloco marinho de ponta a ponta com destaque solar, botão magnético para o WhatsApp e rodapé enxuto.</p></div>
+  </div>
+</div></section>
+
+<!-- 10 PRÓXIMOS PASSOS -->
+<section class="slide escuro"><div class="dentro">
+  <div class="topo"><span>Próximos passos</span><span>10 / 10</span></div>
+  <h2>Da direção aprovada<br>ao site no ar.</h2>
+  <div class="colunas base" style="--n:3">
+    <div><span class="num">01</span><b>Aprovação da Direção</b><p>Você valida ou ajusta este documento visual.</p></div>
+    <div><span class="num">02</span><b>Layout antes dos assets</b><p>Construímos e aprovamos a página sem imagens finais; depois geramos e integramos os assets.</p></div>
+    <div><span class="num">03</span><b>Refinamento humano</b><p>Seu olhar ajusta os detalhes finais antes da entrega empacotada.</p></div>
+  </div>
+</div></section>
+
+</main>
+</body>
+</html>

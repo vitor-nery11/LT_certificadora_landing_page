@@ -1,0 +1,2343 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LT Certificadora · Certificado Digital e-CPF e e-CNPJ por Videoconferência</title>
+<meta name="description" content="Emita ou renove seu certificado digital A1 e A3 (PF e PJ) por videoconferência, sem fila e com suporte humano pelo WhatsApp. Padrão oficial ICP-Brasil.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================================
+   1. SISTEMA DE VARIÁVEIS DA DIREÇÃO CRIATIVA (ESCALAS FECHADAS)
+   ========================================================================== */
+:root {
+  /* Paleta aprovada */
+  --fundo: #F4F7F5;
+  --superficie: #FFFFFF;
+  --superficie-tinta: #E7EFEA;
+  --escuro: #131B3A;
+  --escuro-superficie: #1C2752;
+  --destaque: #2E7D47;
+  --destaque-hover: #236337;
+  --azul-lt: #44509C;
+  --sol-lt: #E8B040;
+
+  /* 3 tons de texto sobre fundo claro */
+  --tinta: #111827;
+  --apoio: #4B5563;
+  --discreto: #6B7280;
+
+  /* 3 tons de texto sobre fundo escuro */
+  --tinta-clara: #F4F7F5;
+  --apoio-claro: #CBD5E1;
+  --discreto-claro: #94A3B8;
+
+  /* Fios e bordas */
+  --fio: rgba(17, 24, 39, 0.12);
+  --fio-escuro: rgba(244, 247, 245, 0.16);
+
+  /* Tipografia: 2 famílias e 2 pesos (400 e 600) */
+  --fonte-titulo: "Bricolage Grotesque", system-ui, -apple-system, sans-serif;
+  --fonte-texto: "Public Sans", system-ui, -apple-system, sans-serif;
+  --peso-normal: 400;
+  --peso-forte: 600;
+
+  /* Escala tipográfica fechada: exatamente 6 papéis */
+  --t-gigante: clamp(1.85rem, 4.4vw, 4.15rem);
+  --t-titulo: clamp(1.55rem, 3.1vw, 2.85rem);
+  --t-subtitulo: clamp(1.2rem, 1.5vw, 1.45rem);
+  --t-abertura: 1.1875rem; /* 19px */
+  --t-corpo: 1.0625rem;    /* 17px */
+  --t-rotulo: 0.8125rem;   /* 13px */
+
+  /* Escala de espaço fechada (9 valores em base 4 + respiro de seção) */
+  --esp-1: 4px;
+  --esp-2: 8px;
+  --esp-3: 12px;
+  --esp-4: 16px;
+  --esp-5: 24px;
+  --esp-6: 32px;
+  --esp-7: 48px;
+  --esp-8: 64px;
+  --esp-9: 96px;
+  --respiro-secao: clamp(72px, 9vw, 128px);
+
+  /* Grid de ponta a ponta (100% da largura da tela), formas e movimento */
+  --largura-max: 100%;
+  --margem: clamp(16px, 3.5vw, 56px);
+  --raio: 20px;
+  --raio-pilula: 999px;
+  --curva: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Camadas nomeadas */
+  --z-base: 1;
+  --z-flutuante: 10;
+  --z-cabecalho: 50;
+  --z-pular: 100;
+}
+
+/* ==========================================================================
+   2. RESET E BASE ACESSÍVEL
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--fundo);
+  color: var(--tinta);
+  font-family: var(--fonte-texto);
+  font-size: var(--t-corpo);
+  font-weight: var(--peso-normal);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--destaque);
+  color: var(--tinta-clara);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Foco visível unificado em todo o site */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--sol-lt);
+  outline-offset: 3px;
+}
+
+/* Link pular para o conteúdo */
+.pular-conteudo {
+  position: absolute;
+  left: -9999px;
+  top: var(--esp-4);
+  z-index: var(--z-pular);
+  background: var(--sol-lt);
+  color: var(--tinta);
+  padding: var(--esp-3) var(--esp-5);
+  border-radius: var(--raio-pilula);
+  font-size: var(--t-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pular-conteudo:focus {
+  position: fixed;
+  left: var(--esp-4);
+}
+
+/* Contêiner de ponta a ponta (100% da largura da tela) */
+.conteiner {
+  width: 100%;
+  max-width: var(--largura-max);
+  margin: 0 auto;
+  padding-left: var(--margem);
+  padding-right: var(--margem);
+}
+
+section[id] {
+  scroll-margin-top: var(--esp-9);
+}
+
+/* Tipografia base */
+h1, h2, h3 {
+  font-family: var(--fonte-titulo);
+  font-weight: var(--peso-forte);
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+h1 {
+  font-size: var(--t-gigante);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: var(--t-titulo);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+}
+
+h3 {
+  font-size: var(--t-subtitulo);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+}
+
+p {
+  text-wrap: pretty;
+  max-width: 65ch;
+  overflow-wrap: break-word;
+}
+
+.rotulo-secao {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+  font-size: var(--t-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--destaque);
+  margin-bottom: var(--esp-4);
+}
+
+.rotulo-secao::before {
+  content: "";
+  width: var(--esp-2);
+  height: var(--esp-2);
+  border-radius: var(--raio-pilula);
+  background: var(--sol-lt);
+  flex-shrink: 0;
+}
+
+.secao-escura .rotulo-secao {
+  color: var(--sol-lt);
+}
+
+/* ==========================================================================
+   3. BOTÕES E INTERAÇÕES (COMPONENTE BOTOES-E-MENU)
+   ========================================================================== */
+.bt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--esp-3);
+  min-height: 48px;
+  max-width: 100%;
+  padding: var(--esp-3) var(--esp-5);
+  background-color: var(--destaque);
+  color: var(--tinta-clara);
+  border-radius: var(--raio-pilula);
+  font-size: var(--t-corpo);
+  font-weight: var(--peso-forte);
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.16s var(--curva), background-color 0.2s var(--curva);
+  will-change: transform;
+}
+
+@media (min-width: 640px) {
+  .bt {
+    padding: var(--esp-3) var(--esp-6);
+  }
+}
+
+@media (hover: hover) {
+  .bt:hover {
+    background-color: var(--destaque-hover);
+  }
+}
+
+.bt:active {
+  transform: scale(0.97);
+}
+
+.bt-icone {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--raio-pilula);
+  background: rgba(255, 255, 255, 0.18);
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: transform 0.25s var(--curva);
+}
+
+@media (hover: hover) {
+  .bt:hover .bt-icone {
+    transform: translateX(2px);
+  }
+}
+
+/* Texto que rola no botão principal (ativo apenas em telas com mouse e espaço) */
+.bt-rolo .bt-m {
+  display: block;
+}
+
+@media (min-width: 640px) and (hover: hover) {
+  .bt-rolo .bt-m {
+    overflow: hidden;
+    line-height: 1.4;
+    height: 1.4em;
+  }
+  .bt-rolo .bt-m span {
+    display: block;
+    transition: transform 0.45s var(--curva);
+  }
+  .bt-rolo .bt-m span::after {
+    content: attr(data-t);
+    display: block;
+  }
+  .bt-rolo:hover .bt-m span {
+    transform: translateY(-50%);
+  }
+}
+
+.bt-ima {
+  transition: transform 0.45s var(--curva), background-color 0.2s var(--curva);
+}
+
+.bt-ima.puxando {
+  transition: transform 0.12s linear;
+}
+
+/* Ação secundária visivelmente mais fraca (contorno) */
+.bt-secundario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--esp-2);
+  min-height: 48px;
+  padding: var(--esp-3) var(--esp-5);
+  border-radius: var(--raio-pilula);
+  border: 1px solid var(--fio-escuro);
+  background: rgba(19, 27, 58, 0.58);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--tinta-clara);
+  font-size: var(--t-corpo);
+  font-weight: var(--peso-forte);
+  transition: border-color 0.2s var(--curva), background-color 0.2s var(--curva), transform 0.16s var(--curva);
+}
+
+@media (hover: hover) {
+  .bt-secundario:hover {
+    border-color: var(--sol-lt);
+    background-color: rgba(19, 27, 58, 0.78);
+  }
+}
+
+.bt-secundario:active {
+  transform: scale(0.97);
+}
+
+/* ==========================================================================
+   4. CABEÇALHO VIVO (COMPONENTE CABECALHO-ROLAGEM)
+   ========================================================================== */
+.cb {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: var(--z-cabecalho);
+  background-color: rgba(19, 27, 58, 0.84);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--fio-escuro);
+  transition: transform 0.45s var(--curva), padding 0.35s var(--curva), background-color 0.35s var(--curva);
+  padding: var(--esp-3) 0;
+}
+
+@media (min-width: 768px) {
+  .cb {
+    padding: var(--esp-4) 0;
+  }
+}
+
+.cb.rolou {
+  padding: var(--esp-3) 0;
+  background-color: rgba(19, 27, 58, 0.96);
+}
+
+.cb.some {
+  transform: translate3d(0, -110%, 0);
+}
+
+.cb-interno {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--esp-3);
+}
+
+.cb-marca {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+  color: var(--tinta-clara);
+  font-family: var(--fonte-titulo);
+  font-size: var(--t-subtitulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: -0.02em;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.cb-marca-complemento {
+  display: none;
+}
+
+@media (min-width: 420px) {
+  .cb-marca {
+    gap: var(--esp-3);
+  }
+  .cb-marca-complemento {
+    display: inline;
+  }
+}
+
+.marca-simbolo {
+  width: 44px;
+  height: 36px;
+  border-radius: var(--esp-2);
+  background: var(--superficie);
+  display: inline-grid;
+  place-items: center;
+  padding: var(--esp-1);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.marca-simbolo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (min-width: 640px) {
+  .marca-simbolo {
+    width: 48px;
+    height: 40px;
+    border-radius: var(--esp-3);
+  }
+}
+
+.cb-nav {
+  display: none;
+  position: relative;
+  align-items: center;
+  gap: var(--esp-6);
+}
+
+.cb-nav a {
+  color: var(--apoio-claro);
+  font-size: var(--t-corpo);
+  font-weight: var(--peso-normal);
+  padding: var(--esp-2) 0;
+  transition: color 0.2s var(--curva);
+}
+
+.cb-nav a:hover,
+.cb-nav a[aria-current="true"] {
+  color: var(--tinta-clara);
+}
+
+.mu-fio {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: var(--sol-lt);
+  transition: transform 0.45s var(--curva), width 0.45s var(--curva);
+  pointer-events: none;
+}
+
+.cb-acoes {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  flex-shrink: 0;
+}
+
+.cb-acoes .bt {
+  padding: var(--esp-2) var(--esp-4);
+  min-height: 44px;
+  font-size: var(--t-rotulo);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cb-acoes .cb-texto-longo {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .cb-acoes {
+    gap: var(--esp-3);
+  }
+  .cb-acoes .bt {
+    padding: var(--esp-3) var(--esp-5);
+    min-height: 48px;
+    font-size: var(--t-corpo);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .cb-acoes .cb-texto-curto {
+    display: none;
+  }
+  .cb-acoes .cb-texto-longo {
+    display: block;
+  }
+}
+
+.cb-botao-menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: var(--esp-2) var(--esp-3);
+  border-radius: var(--raio-pilula);
+  border: 1px solid var(--fio-escuro);
+  color: var(--tinta-clara);
+  font-size: var(--t-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.menu-gaveta {
+  display: none;
+  background: var(--escuro);
+  border-top: 1px solid var(--fio-escuro);
+  padding: var(--esp-5) var(--margem);
+}
+
+.menu-gaveta.aberto {
+  display: grid;
+  gap: var(--esp-4);
+}
+
+.menu-gaveta a {
+  color: var(--tinta-clara);
+  font-size: var(--t-abertura);
+  font-weight: var(--peso-forte);
+  padding: var(--esp-2) 0;
+  border-bottom: 1px solid var(--fio-escuro);
+}
+
+@media (min-width: 1024px) {
+  .cb-nav {
+    display: flex;
+  }
+  .cb-botao-menu,
+  .menu-gaveta {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   5. SEÇÃO 1: ABERTURA (HERO DE TELA CHEIA COM FOTOGRAFIA DE FUNDO)
+   ========================================================================== */
+.abertura {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--escuro);
+  color: var(--tinta-clara);
+  padding-top: calc(var(--esp-9) + var(--esp-5));
+  padding-bottom: var(--esp-8);
+  min-height: clamp(680px, 100dvh, 980px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Camada 0: Fotografia real de ponta a ponta ocupando 100% da Abertura */
+.abertura-fundo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--escuro);
+}
+
+.abertura-foto-fundo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 76% 24%;
+}
+
+@media (min-width: 1024px) {
+  .abertura-foto-fundo {
+    object-position: 70% 28%;
+  }
+}
+
+/* Véu escuro direcional sobre a fotografia para contraste de sobra no texto */
+.abertura-fundo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(19, 27, 58, 0.88) 0%,
+    rgba(19, 27, 58, 0.76) 52%,
+    rgba(19, 27, 58, 0.94) 100%
+  );
+}
+
+@media (min-width: 1024px) {
+  .abertura-fundo::after {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(19, 27, 58, 0.45) 0%,
+        rgba(19, 27, 58, 0.08) 38%,
+        rgba(19, 27, 58, 0.78) 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(19, 27, 58, 0.95) 0%,
+        rgba(19, 27, 58, 0.84) 42%,
+        rgba(19, 27, 58, 0.24) 70%,
+        rgba(19, 27, 58, 0.08) 100%
+      );
+  }
+}
+
+.abertura-palco {
+  position: relative;
+  z-index: var(--z-base);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--esp-8);
+  padding-top: var(--esp-4);
+}
+
+.abertura-grade {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-7);
+  align-items: end;
+  margin: auto 0;
+}
+
+.abertura-grade > * {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .abertura-grade {
+    grid-template-columns: 1.25fr 0.95fr;
+    gap: var(--esp-8);
+    align-items: end;
+  }
+}
+
+.abertura-texto h1 {
+  margin-bottom: var(--esp-5);
+  max-width: 18ch;
+}
+
+/* Componente texto-linhas */
+.tl-m {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.1em;
+}
+
+.tl-w {
+  display: inline-block;
+}
+
+.js .tl-w {
+  transform: translateY(105%);
+  transition: transform 0.45s var(--curva) calc(var(--l, 0) * 40ms);
+}
+
+.js .tl-on .tl-w {
+  transform: none;
+}
+
+.abertura-subtitulo {
+  font-size: var(--t-abertura);
+  color: var(--apoio-claro);
+  margin-bottom: var(--esp-6);
+  max-width: 56ch;
+}
+
+.abertura-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--esp-4);
+}
+
+/* Coluna direita da Abertura: deixa a fotografia respirar e ancora o Cartão Solar na base */
+.abertura-ancora-fundo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+@media (min-width: 1024px) {
+  .abertura-ancora-fundo {
+    align-items: flex-end;
+  }
+}
+
+.cartao-assinatura {
+  width: 100%;
+  max-width: 480px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--tinta);
+  border-radius: var(--raio);
+  padding: var(--esp-4) var(--esp-5);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-4);
+  border: 2px solid var(--sol-lt);
+}
+
+.cartao-assinatura-info {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+}
+
+.cartao-assinatura-info strong {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-size: var(--t-corpo);
+  font-weight: var(--peso-forte);
+}
+
+.cartao-assinatura-info span {
+  font-size: var(--t-rotulo);
+  color: var(--apoio);
+}
+
+.cartao-assinatura-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+  background: rgba(46, 125, 71, 0.12);
+  color: var(--destaque);
+  padding: var(--esp-2) var(--esp-3);
+  border-radius: var(--raio-pilula);
+  font-size: var(--t-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cartao-assinatura-status::before {
+  content: "";
+  width: var(--esp-2);
+  height: var(--esp-2);
+  border-radius: var(--raio-pilula);
+  background: var(--destaque);
+}
+
+/* Barra de 3 selos translúcidos na base da Abertura de ponta a ponta */
+.abertura-selos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-4);
+  padding-top: var(--esp-6);
+  border-top: 1px solid var(--fio-escuro);
+}
+
+@media (min-width: 768px) {
+  .abertura-selos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.selo-rapido {
+  background: rgba(19, 27, 58, 0.74);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--fio-escuro);
+  border-radius: var(--raio);
+  padding: var(--esp-4) var(--esp-5);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--esp-3);
+}
+
+.selo-ponto {
+  width: var(--esp-3);
+  height: var(--esp-3);
+  border-radius: var(--raio-pilula);
+  background: var(--sol-lt);
+  margin-top: var(--esp-1);
+  flex-shrink: 0;
+}
+
+.selo-rapido strong {
+  display: block;
+  font-size: var(--t-corpo);
+  font-weight: var(--peso-forte);
+  color: var(--tinta-clara);
+}
+
+.selo-rapido span {
+  font-size: var(--t-rotulo);
+  color: var(--apoio-claro);
+}
+
+/* ==========================================================================
+   6. SEÇÃO 2: OS 4 CERTIFICADOS DIGITAIS (PONTA A PONTA)
+   ========================================================================== */
+.secao-certificados {
+  padding: var(--respiro-secao) 0;
+}
+
+.cabecalho-secao {
+  margin-bottom: var(--esp-8);
+  display: grid;
+  gap: var(--esp-4);
+}
+
+@media (min-width: 1024px) {
+  .cabecalho-secao {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--esp-8);
+  }
+}
+
+.cabecalho-secao p {
+  font-size: var(--t-abertura);
+  color: var(--apoio);
+}
+
+.grade-certificados {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-5);
+}
+
+@media (min-width: 768px) {
+  .grade-certificados {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1360px) {
+  .grade-certificados {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.cartao-certificado {
+  background: var(--superficie);
+  border: 1px solid var(--fio);
+  border-radius: var(--raio);
+  padding: var(--esp-5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--esp-5);
+  transition: transform 0.25s var(--curva), border-color 0.25s var(--curva);
+}
+
+@media (min-width: 640px) {
+  .cartao-certificado {
+    padding: var(--esp-6);
+  }
+}
+
+@media (hover: hover) {
+  .cartao-certificado:hover {
+    transform: translateY(-2px);
+    border-color: var(--destaque);
+  }
+}
+
+/* Destaque para o cartão A1 PJ (inspirado na referência Finovate) */
+.cartao-certificado.destaque-pj {
+  background: var(--escuro);
+  color: var(--tinta-clara);
+  border-color: var(--escuro);
+}
+
+.cartao-certificado.destaque-pj p {
+  color: var(--apoio-claro);
+}
+
+.cartao-midia {
+  aspect-ratio: 16 / 9;
+  border-radius: var(--esp-3);
+  overflow: hidden;
+  border: 1px solid var(--fio);
+  background: var(--superficie-tinta);
+}
+
+.cartao-certificado.destaque-pj .cartao-midia {
+  border-color: var(--fio-escuro);
+  background: var(--escuro-superficie);
+}
+
+.cartao-midia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--curva);
+}
+
+@media (hover: hover) {
+  .cartao-certificado:hover .cartao-midia img {
+    transform: scale(1.03);
+  }
+}
+
+.etiquetas-certificado {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-2);
+  margin-bottom: var(--esp-3);
+}
+
+.pilula-meta {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--esp-1) var(--esp-3);
+  border-radius: var(--raio-pilula);
+  background: var(--superficie-tinta);
+  color: var(--destaque);
+  font-size: var(--t-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pilula-meta.azul {
+  background: rgba(68, 80, 156, 0.12);
+  color: var(--azul-lt);
+}
+
+.cartao-certificado.destaque-pj .pilula-meta {
+  background: rgba(232, 176, 64, 0.18);
+  color: var(--sol-lt);
+}
+
+.cartao-certificado h3 {
+  margin-bottom: var(--esp-3);
+}
+
+.cartao-certificado p {
+  color: var(--apoio);
+}
+
+.cartao-rodape {
+  padding-top: var(--esp-4);
+  border-top: 1px solid var(--fio);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-4);
+}
+
+.cartao-certificado.destaque-pj .cartao-rodape {
+  border-top-color: var(--fio-escuro);
+}
+
+.link-acao-cartao {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-3);
+  min-height: 44px;
+  font-size: var(--t-corpo);
+  font-weight: var(--peso-forte);
+  color: var(--destaque);
+}
+
+.cartao-certificado.destaque-pj .link-acao-cartao {
+  color: var(--sol-lt);
+}
+
+.link-acao-cartao span {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--raio-pilula);
+  background: var(--superficie-tinta);
+  color: var(--destaque);
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: transform 0.2s var(--curva);
+}
+
+.cartao-certificado.destaque-pj .link-acao-cartao span {
+  background: var(--destaque);
+  color: var(--tinta-clara);
+}
+
+@media (hover: hover) {
+  .cartao-certificado:hover .link-acao-cartao span {
+    transform: translateX(3px);
+  }
+}
+
+/* ==========================================================================
+   7. SEÇÃO 3: COMPARATIVO A1 OU A3 (QUEBRA DE RITMO EM BLOCO ESCURO)
+   ========================================================================== */
+.secao-comparativo {
+  background-color: var(--escuro);
+  color: var(--tinta-clara);
+  padding: var(--respiro-secao) 0;
+}
+
+.secao-comparativo .cabecalho-secao p {
+  color: var(--apoio-claro);
+}
+
+.tabela-comparativa {
+  border-top: 1px solid var(--fio-escuro);
+}
+
+.linha-comparativa {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-4);
+  padding: var(--esp-6) 0;
+  border-bottom: 1px solid var(--fio-escuro);
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .linha-comparativa {
+    grid-template-columns: 0.9fr 1.05fr 1.05fr;
+    gap: var(--esp-6);
+  }
+}
+
+.criterio-titulo {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+}
+
+.criterio-num {
+  font-size: var(--t-rotulo);
+  font-weight: var(--peso-forte);
+  color: var(--sol-lt);
+  letter-spacing: 0.08em;
+}
+
+.coluna-modelo {
+  background: rgba(244, 247, 245, 0.04);
+  border: 1px solid var(--fio-escuro);
+  border-radius: var(--raio);
+  padding: var(--esp-5);
+}
+
+.coluna-modelo strong {
+  display: block;
+  font-size: var(--t-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sol-lt);
+  margin-bottom: var(--esp-2);
+}
+
+.coluna-modelo.modelo-a3 strong {
+  color: #93C5FD;
+}
+
+.coluna-modelo p {
+  color: var(--tinta-clara);
+}
+
+.comparativo-ajuda {
+  margin-top: var(--esp-7);
+  background: var(--escuro-superficie);
+  border: 1px solid var(--fio-escuro);
+  border-radius: var(--raio);
+  padding: var(--esp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-5);
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .comparativo-ajuda {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.comparativo-ajuda p {
+  color: var(--apoio-claro);
+  margin-top: var(--esp-2);
+}
+
+/* ==========================================================================
+   8. SEÇÃO 4: COMO FUNCIONA A VIDEOCONFERÊNCIA (COMPONENTE ETAPAS-PRESAS)
+   ========================================================================== */
+.secao-etapas {
+  padding: var(--respiro-secao) 0;
+}
+
+.ep-grade {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-8);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .ep-grade {
+    grid-template-columns: 1fr 1.05fr;
+    gap: var(--esp-9);
+  }
+  .ep-fixo {
+    position: sticky;
+    top: var(--esp-9);
+  }
+}
+
+.ep-fixo h2 {
+  margin-bottom: var(--esp-4);
+}
+
+.ep-fixo > p {
+  color: var(--apoio);
+  font-size: var(--t-abertura);
+  margin-bottom: var(--esp-6);
+}
+
+.ep-contador-barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--esp-4);
+  font-size: var(--t-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--destaque);
+}
+
+.painel-etapa-midia {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--raio);
+  overflow: hidden;
+  border: 1px solid var(--fio);
+  margin-bottom: var(--esp-5);
+  background: var(--escuro);
+}
+
+.painel-etapa-midia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.painel-etapa-legenda {
+  position: absolute;
+  left: var(--esp-4);
+  right: var(--esp-4);
+  bottom: var(--esp-4);
+  background: rgba(19, 27, 58, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--tinta-clara);
+  padding: var(--esp-3) var(--esp-4);
+  border-radius: var(--esp-3);
+  border: 1px solid var(--fio-escuro);
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+}
+
+.painel-etapa-legenda::before {
+  content: "";
+  width: var(--esp-2);
+  height: var(--esp-2);
+  border-radius: var(--raio-pilula);
+  background: var(--sol-lt);
+  flex-shrink: 0;
+}
+
+.painel-etapa-legenda strong {
+  font-family: var(--fonte-titulo);
+  font-size: var(--t-corpo);
+  font-weight: var(--peso-forte);
+}
+
+.ep-lista {
+  position: relative;
+  display: grid;
+  gap: var(--esp-7);
+}
+
+.ep-lista::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--fio);
+}
+
+.ep-lista::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--destaque);
+  transform-origin: top;
+  transform: scaleY(var(--prog, 0.33));
+}
+
+.ep-passo {
+  padding-left: var(--esp-6);
+  padding-top: var(--esp-4);
+  padding-bottom: var(--esp-4);
+  transition: opacity 0.4s var(--curva);
+}
+
+@media (min-width: 1024px) {
+  .ep-passo {
+    min-height: clamp(200px, 26vh, 300px);
+    opacity: 0.42;
+  }
+  .ep-passo.ativo {
+    opacity: 1;
+  }
+}
+
+.ep-n {
+  display: inline-block;
+  font-size: var(--t-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--destaque);
+  margin-bottom: var(--esp-3);
+}
+
+.ep-passo h3 {
+  margin-bottom: var(--esp-3);
+}
+
+.ep-passo p {
+  color: var(--apoio);
+}
+
+/* ==========================================================================
+   9. SEÇÃO 5: SEGURANÇA E CONFIANÇA (COMPONENTE IMAGEM-CORTINA)
+   ========================================================================== */
+.secao-seguranca {
+  padding: var(--respiro-secao) 0;
+  background-color: var(--superficie);
+  border-top: 1px solid var(--fio);
+  border-bottom: 1px solid var(--fio);
+}
+
+.seguranca-grade {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-8);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .seguranca-grade {
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: var(--esp-9);
+  }
+}
+
+.seguranca-esquerda h2 {
+  margin-bottom: var(--esp-5);
+}
+
+.seguranca-esquerda > p {
+  color: var(--apoio);
+  font-size: var(--t-abertura);
+  margin-bottom: var(--esp-6);
+}
+
+/* Componente imagem-cortina */
+.ic {
+  overflow: hidden;
+  border-radius: var(--raio);
+  border: 1px solid var(--fio);
+  background: var(--superficie-tinta);
+}
+
+.quadro-seguranca {
+  aspect-ratio: 3 / 2;
+}
+
+.quadro-seguranca img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+}
+
+.js .ic .ic-alvo {
+  clip-path: inset(0 0 100% 0);
+  transform: scale(1.06);
+  transition: clip-path 1s var(--curva), transform 1.3s var(--curva);
+}
+
+.js .ic.ic-on .ic-alvo {
+  clip-path: inset(0);
+  transform: none;
+}
+
+.pilares-lista {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-5);
+}
+
+@media (min-width: 640px) {
+  .pilares-lista {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.pilar-item {
+  background: var(--fundo);
+  border: 1px solid var(--fio);
+  border-radius: var(--raio);
+  padding: var(--esp-6);
+  display: grid;
+  gap: var(--esp-3);
+  align-content: start;
+}
+
+.pilar-icone {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--esp-3);
+  background: var(--superficie-tinta);
+  color: var(--destaque);
+  display: inline-grid;
+  place-items: center;
+}
+
+.pilar-item p {
+  color: var(--apoio);
+}
+
+/* ==========================================================================
+   10. SEÇÃO 6: PERGUNTAS FREQUENTES (COMPONENTE FAQ-ANIMADO)
+   ========================================================================== */
+.secao-faq {
+  padding: var(--respiro-secao) 0;
+}
+
+.fq-grade {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-8);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .fq-grade {
+    grid-template-columns: 0.9fr 1.3fr;
+    gap: var(--esp-9);
+  }
+}
+
+.fq-chamada h2 {
+  margin-bottom: var(--esp-4);
+}
+
+.fq-chamada p {
+  color: var(--apoio);
+  font-size: var(--t-abertura);
+  margin-bottom: var(--esp-6);
+}
+
+.fq-lista {
+  border-bottom: 1px solid var(--fio);
+}
+
+.fq-item {
+  border-top: 1px solid var(--fio);
+}
+
+.fq-b {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--esp-5);
+  padding: var(--esp-5) 0;
+  text-align: left;
+  font-family: var(--fonte-titulo);
+  font-size: var(--t-subtitulo);
+  font-weight: var(--peso-forte);
+  min-height: 48px;
+}
+
+.fq-b i {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: transform 0.4s var(--curva);
+}
+
+.fq-b i::before,
+.fq-b i::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  background: var(--destaque);
+}
+
+.fq-b i::after {
+  transform: rotate(90deg);
+  transition: opacity 0.25s var(--curva);
+}
+
+.fq-b[aria-expanded="true"] i {
+  transform: rotate(180deg);
+}
+
+.fq-b[aria-expanded="true"] i::after {
+  opacity: 0;
+}
+
+.fq-p {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s var(--curva);
+}
+
+.fq-p > div {
+  overflow: hidden;
+  visibility: hidden;
+  transition: visibility 0.45s;
+}
+
+.fq-item.aberto .fq-p {
+  grid-template-rows: 1fr;
+}
+
+.fq-item.aberto .fq-p > div {
+  visibility: visible;
+}
+
+.fq-p p {
+  color: var(--apoio);
+  padding-bottom: var(--esp-5);
+}
+
+/* ==========================================================================
+   11. SEÇÃO 7: CHAMADA FINAL E RODAPÉ INSTITUCIONAL
+   ========================================================================== */
+.secao-fechamento {
+  background-color: var(--escuro);
+  color: var(--tinta-clara);
+  padding-top: var(--respiro-secao);
+  padding-bottom: var(--esp-8);
+}
+
+.bloco-chamada-final {
+  background: var(--escuro-superficie);
+  border: 1px solid rgba(232, 176, 64, 0.35);
+  border-radius: var(--raio);
+  padding: clamp(32px, 5vw, 64px);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-6);
+  align-items: center;
+  margin-bottom: var(--esp-9);
+}
+
+@media (min-width: 1024px) {
+  .bloco-chamada-final {
+    grid-template-columns: 1.3fr auto;
+  }
+}
+
+.bloco-chamada-final h2 {
+  margin-bottom: var(--esp-4);
+}
+
+.bloco-chamada-final p {
+  color: var(--apoio-claro);
+  font-size: var(--t-abertura);
+}
+
+.rodape-interno {
+  padding-top: var(--esp-7);
+  border-top: 1px solid var(--fio-escuro);
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-5);
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .rodape-interno {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.rodape-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-5);
+}
+
+.rodape-links a {
+  color: var(--apoio-claro);
+  font-size: var(--t-corpo);
+  transition: color 0.2s var(--curva);
+}
+
+.rodape-links a:hover {
+  color: var(--tinta-clara);
+}
+
+.rodape-base {
+  margin-top: var(--esp-6);
+  padding-top: var(--esp-5);
+  border-top: 1px solid var(--fio-escuro);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--esp-4);
+  font-size: var(--t-rotulo);
+  color: var(--discreto-claro);
+}
+
+/* Respeito total a movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  .cb,
+  .bt,
+  .bt-rolo .bt-m span,
+  .bt-ima,
+  .mu-fio,
+  .js .tl-w,
+  .cartao-certificado,
+  .cartao-midia img,
+  .ep-passo,
+  .js .ic .ic-alvo,
+  .fq-p,
+  .fq-b i {
+    transition: none !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<a class="pular-conteudo" href="#conteudo-principal">Pular para o conteúdo principal</a>
+
+<!-- =======================================================================
+     CABEÇALHO FIXO
+     ======================================================================= -->
+<header class="cb" data-cabecalho>
+  <div class="conteiner cb-interno">
+    <a class="cb-marca" href="#topo" aria-label="LT Certificadora, voltar ao início">
+      <span class="marca-simbolo">
+        <img src="imagens/logo-lt.png" alt="" width="132" height="83">
+      </span>
+      <span>LT<span class="cb-marca-complemento"> Certificadora</span></span>
+    </a>
+
+    <nav class="cb-nav" data-menu-fio aria-label="Navegação principal">
+      <a href="#certificados" aria-current="true">Certificados</a>
+      <a href="#comparativo">A1 ou A3</a>
+      <a href="#como-funciona">Como Funciona</a>
+      <a href="#duvidas">Dúvidas</a>
+      <span class="mu-fio" aria-hidden="true"></span>
+    </nav>
+
+    <div class="cb-acoes">
+      <a class="bt bt-rolo" href="https://api.whatsapp.com/send?phone=557381223553&text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20seu%20site" target="_blank" rel="noopener noreferrer">
+        <span class="cb-texto-curto">Agendar</span>
+        <span class="bt-m cb-texto-longo"><span data-t="Agendar videoconferência">Agendar videoconferência</span></span>
+      </a>
+      <button class="cb-botao-menu" type="button" aria-expanded="false" aria-controls="menu-mobile" data-abrir-menu>Menu</button>
+    </div>
+  </div>
+
+  <nav class="menu-gaveta" id="menu-mobile" aria-label="Menu para celular">
+    <a href="#certificados" data-link-mobile>Certificados</a>
+    <a href="#comparativo" data-link-mobile>A1 ou A3</a>
+    <a href="#como-funciona" data-link-mobile>Como Funciona</a>
+    <a href="#duvidas" data-link-mobile>Dúvidas</a>
+  </nav>
+</header>
+
+<main id="conteudo-principal">
+
+  <!-- =====================================================================
+       01. ABERTURA (HERO DE TELA CHEIA COM FOTOGRAFIA DE FUNDO PONTA A PONTA)
+       ===================================================================== -->
+  <section class="abertura secao-escura" id="topo">
+    <div class="abertura-fundo">
+      <img
+        class="abertura-foto-fundo"
+        src="imagens/hero-videoconferencia.jpg"
+        alt="Especialista da LT Certificadora em atendimento por videoconferência em escritório iluminado pela luz do sol"
+        width="1376"
+        height="768"
+        fetchpriority="high"
+        decoding="async"
+      >
+    </div>
+
+    <div class="conteiner abertura-palco">
+      <div class="abertura-grade">
+        <div class="abertura-texto">
+          <span class="rotulo-secao">Sua identidade digital pronta sem sair da rotina</span>
+          <h1 data-linhas>Emita ou renove seu certificado digital por videoconferência, sem fila e com suporte humano do início ao fim.</h1>
+          <p class="abertura-subtitulo">Certificados e-CPF e e-CNPJ nos modelos A1 e A3 com validade jurídica em todo o Brasil. Nossa equipe confere sua documentação pelo WhatsApp e acompanha você na validação online.</p>
+
+          <div class="abertura-botoes">
+            <a class="bt bt-rolo bt-ima" data-ima href="https://api.whatsapp.com/send?phone=557381223553&text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20seu%20site" target="_blank" rel="noopener noreferrer">
+              <span class="bt-m"><span data-t="Agendar videoconferência no WhatsApp">Agendar videoconferência no WhatsApp</span></span>
+              <span class="bt-icone" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+            <a class="bt-secundario" href="#certificados">Escolher entre A1 e A3</a>
+          </div>
+        </div>
+
+        <div class="abertura-ancora-fundo">
+          <!-- ELEMENTO DE ASSINATURA: CARTÃO DE VALIDAÇÃO SOLAR -->
+          <div class="cartao-assinatura" aria-label="Selo de assinatura LT Certificadora">
+            <div class="cartao-assinatura-info">
+              <span class="marca-simbolo">
+                <img src="imagens/logo-lt.png" alt="" width="132" height="83">
+              </span>
+              <div>
+                <strong>Validação por Vídeo · ICP-Brasil</strong>
+                <span>Conferência prévia de documentos pelo WhatsApp</span>
+              </div>
+            </div>
+            <span class="cartao-assinatura-status">Suporte humano</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="abertura-selos" aria-label="Garantias principais">
+        <div class="selo-rapido">
+          <span class="selo-ponto" aria-hidden="true"></span>
+          <div>
+            <strong>Validação por videoconferência</strong>
+            <span>Pelo celular ou computador</span>
+          </div>
+        </div>
+        <div class="selo-rapido">
+          <span class="selo-ponto" aria-hidden="true"></span>
+          <div>
+            <strong>Padrão oficial ICP-Brasil</strong>
+            <span>Validade jurídica nacional</span>
+          </div>
+        </div>
+        <div class="selo-rapido">
+          <span class="selo-ponto" aria-hidden="true"></span>
+          <div>
+            <strong>Atendimento para PF e PJ</strong>
+            <span>Modelos A1 e A3 completos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       02. OS 4 CERTIFICADOS DIGITAIS
+       ===================================================================== -->
+  <section class="secao-certificados" id="certificados">
+    <div class="conteiner">
+      <div class="cabecalho-secao">
+        <div>
+          <span class="rotulo-secao">Modelos para CPF e Empresa</span>
+          <h2>Escolha o certificado ideal para o seu CPF ou para a sua empresa.</h2>
+        </div>
+        <p>Trabalhamos com as quatro modalidades oficiais. Selecione abaixo o modelo que o seu contador ou rotina pede e agende direto com a equipe.</p>
+      </div>
+
+      <div class="grade-certificados">
+        <!-- Cartão 1: A1 PF -->
+        <article class="cartao-certificado">
+          <div>
+            <div class="cartao-midia">
+              <img
+                src="imagens/credencial-a1-pf.jpg"
+                alt="Escudo digital translúcido em verde e dourado sobre o teclado de um notebook representando o certificado e-CPF A1"
+                width="1376"
+                height="768"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+          </div>
+          <div>
+            <div class="etiquetas-certificado">
+              <span class="pilula-meta">Arquivo no computador</span>
+              <span class="pilula-meta">Validade de 1 ano</span>
+            </div>
+            <h3>A1 Pessoa Física (e-CPF A1)</h3>
+            <p>Arquivo digital instalado direto no computador. Validade de 1 ano. Ideal para assinar documentos com validade jurídica, enviar Imposto de Renda e acessar portais como e-CAC e Gov.br com praticidade.</p>
+          </div>
+          <div class="cartao-rodape">
+            <a class="link-acao-cartao" href="https://api.whatsapp.com/send?phone=557381223553&text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20seu%20site" target="_blank" rel="noopener noreferrer">
+              Consultar e agendar no WhatsApp
+              <span aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Cartão 2: A1 PJ (Destaque visual) -->
+        <article class="cartao-certificado destaque-pj">
+          <div>
+            <div class="cartao-midia">
+              <img
+                src="imagens/credencial-a1-pj.jpg"
+                alt="Selo criptográfico dourado e verde iluminado sobre um notebook escuro representando o certificado empresarial e-CNPJ A1"
+                width="1376"
+                height="768"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+          </div>
+          <div>
+            <div class="etiquetas-certificado">
+              <span class="pilula-meta">Mais procurado por empresas</span>
+              <span class="pilula-meta">Validade de 1 ano</span>
+            </div>
+            <h3>A1 Pessoa Jurídica (e-CNPJ A1)</h3>
+            <p>Arquivo digital instalado no computador ou integrado ao sistema emissor. Validade de 1 ano. Recomendado para empresas que emitem notas fiscais eletrônicas diariamente e precisam de agilidade na rotina contábil.</p>
+          </div>
+          <div class="cartao-rodape">
+            <a class="link-acao-cartao" href="https://api.whatsapp.com/send?phone=557381223553&text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20seu%20site" target="_blank" rel="noopener noreferrer">
+              Consultar e agendar no WhatsApp
+              <span aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Cartão 3: A3 PF -->
+        <article class="cartao-certificado">
+          <div>
+            <div class="cartao-midia">
+              <img
+                src="imagens/credencial-a3-pf.jpg"
+                alt="Token USB azul metálico ao lado de cartão inteligente com chip dourado representando o certificado e-CPF A3"
+                width="1376"
+                height="768"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+          </div>
+          <div>
+            <div class="etiquetas-certificado">
+              <span class="pilula-meta azul">Token ou cartão físico</span>
+              <span class="pilula-meta azul">Validade de 1 a 3 anos</span>
+            </div>
+            <h3>A3 Pessoa Física (e-CPF A3)</h3>
+            <p>Armazenado em mídia física (token USB ou cartão inteligente). Validade de 1 a 3 anos. Indicado para profissionais liberais, advogados, médicos e quem prefere um prazo maior de validade em dispositivo dedicado.</p>
+          </div>
+          <div class="cartao-rodape">
+            <a class="link-acao-cartao" href="https://api.whatsapp.com/send?phone=557381223553&text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20seu%20site" target="_blank" rel="noopener noreferrer">
+              Consultar e agendar no WhatsApp
+              <span aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Cartão 4: A3 PJ -->
+        <article class="cartao-certificado">
+          <div>
+            <div class="cartao-midia">
+              <img
+                src="imagens/credencial-a3-pj.jpg"
+                alt="Leitora de cartão inteligente azul e dourada com cartão inserido ao lado de token USB representando o certificado e-CNPJ A3"
+                width="1376"
+                height="768"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+          </div>
+          <div>
+            <div class="etiquetas-certificado">
+              <span class="pilula-meta azul">Token ou cartão físico</span>
+              <span class="pilula-meta azul">Validade de 1 a 3 anos</span>
+            </div>
+            <h3>A3 Pessoa Jurídica (e-CNPJ A3)</h3>
+            <p>Armazenado em token USB ou cartão inteligente. Validade de 1 a 3 anos. Indicado para sócios e representantes legais que buscam ciclo longo de renovação e controle de uso em mídia física exclusiva.</p>
+          </div>
+          <div class="cartao-rodape">
+            <a class="link-acao-cartao" href="https://api.whatsapp.com/send?phone=557381223553&text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20seu%20site" target="_blank" rel="noopener noreferrer">
+              Consultar e agendar no WhatsApp
+              <span aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       03. COMPARATIVO RÁPIDO: A1 OU A3?
+       ===================================================================== -->
+  <section class="secao-comparativo secao-escura" id="comparativo">
+    <div class="conteiner">
+      <div class="cabecalho-secao">
+        <div>
+          <span class="rotulo-secao">Comparativo Direto</span>
+          <h2>Em dúvida entre A1 e A3? Entenda a diferença em segundos.</h2>
+        </div>
+        <p>Os dois modelos têm a mesma validade jurídica oficial ICP-Brasil. O que muda é onde o certificado fica guardado e o tempo de renovação.</p>
+      </div>
+
+      <div class="tabela-comparativa" role="region" aria-label="Comparação entre certificado A1 e A3">
+        <div class="linha-comparativa">
+          <div class="criterio-titulo">
+            <span class="criterio-num">01</span>
+            <h3>Onde fica guardado</h3>
+          </div>
+          <div class="coluna-modelo">
+            <strong>Modelo A1 (Arquivo Digital)</strong>
+            <p>Instalado diretamente no computador ou no sistema emissor de notas fiscais.</p>
+          </div>
+          <div class="coluna-modelo modelo-a3">
+            <strong>Modelo A3 (Mídia Física)</strong>
+            <p>Gravado em dispositivo físico dedicado, como token USB ou cartão inteligente.</p>
+          </div>
+        </div>
+
+        <div class="linha-comparativa">
+          <div class="criterio-titulo">
+            <span class="criterio-num">02</span>
+            <h3>Prazo de validade</h3>
+          </div>
+          <div class="coluna-modelo">
+            <strong>Modelo A1 (Arquivo Digital)</strong>
+            <p>Validade fixa de 1 ano, ideal para quem busca custo inicial enxuto e agilidade.</p>
+          </div>
+          <div class="coluna-modelo modelo-a3">
+            <strong>Modelo A3 (Mídia Física)</strong>
+            <p>Pode ser emitido com validade de 1 a 3 anos, reduzindo a frequência de renovação.</p>
+          </div>
+        </div>
+
+        <div class="linha-comparativa">
+          <div class="criterio-titulo">
+            <span class="criterio-num">03</span>
+            <h3>Praticidade no uso</h3>
+          </div>
+          <div class="coluna-modelo">
+            <strong>Modelo A1 (Arquivo Digital)</strong>
+            <p>Funciona direto no computador e nos sistemas de nota fiscal sem precisar conectar aparelhos.</p>
+          </div>
+          <div class="coluna-modelo modelo-a3">
+            <strong>Modelo A3 (Mídia Física)</strong>
+            <p>Exige conectar o token USB ou a leitora de cartão a cada assinatura ou acesso.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparativo-ajuda">
+        <div>
+          <h3>04 · Ajuda na escolha pelo WhatsApp</h3>
+          <p>Se o seu contador ou sistema pediu um modelo específico e você não tem certeza de qual é, nossa equipe confirma para você no WhatsApp.</p>
+        </div>
+        <a class="bt bt-rolo" href="https://api.whatsapp.com/send?phone=557381223553&text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20seu%20site" target="_blank" rel="noopener noreferrer">
+          <span class="bt-m"><span data-t="Tirar dúvida com a equipe">Tirar dúvida com a equipe</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       04. COMO FUNCIONA A EMISSÃO POR VIDEOCONFERÊNCIA (ETAPAS PRESAS)
+       ===================================================================== -->
+  <section class="secao-etapas" id="como-funciona" data-etapas>
+    <div class="conteiner ep-grade">
+      <div class="ep-fixo">
+        <span class="rotulo-secao">Passo a Passo sem Deslocamento</span>
+        <h2>Do primeiro contato ao certificado pronto em 3 passos simples.</h2>
+        <p>Você não precisa enfrentar trânsito nem esperar em sala de atendimento. Nossa equipe conduz tudo com você.</p>
+
+        <div class="ep-contador-barra">
+          <span>Etapa em leitura</span>
+          <span data-etapa-contador>01 / 03</span>
+        </div>
+
+        <div class="painel-etapa-midia">
+          <img
+            src="imagens/processo-videoconferencia.jpg"
+            alt="Mesa de trabalho iluminada pela luz da manhã com notebook e smartphone posicionados para videoconferência"
+            width="1376"
+            height="768"
+            loading="lazy"
+            decoding="async"
+          >
+          <div class="painel-etapa-legenda">
+            <strong data-etapa-legenda>Etapa 01: Conferência rápida no WhatsApp</strong>
+          </div>
+        </div>
+
+        <a class="bt bt-rolo" href="https://api.whatsapp.com/send?phone=557381223553&text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20seu%20site" target="_blank" rel="noopener noreferrer">
+          <span class="bt-m"><span data-t="Agendar videoconferência no WhatsApp">Agendar videoconferência no WhatsApp</span></span>
+          <span class="bt-icone" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+      </div>
+
+      <ol class="ep-lista">
+        <li class="ep-passo ativo" data-titulo-etapa="Etapa 01: Conferência rápida no WhatsApp">
+          <span class="ep-n">Passo 01</span>
+          <h3>Conferência e agendamento no WhatsApp</h3>
+          <p>Você chama nossa equipe, informa se precisa de e-CPF ou e-CNPJ, envia os documentos para análise prévia e escolhe o melhor horário.</p>
+        </li>
+        <li class="ep-passo" data-titulo-etapa="Etapa 02: Validação rápida por chamada de vídeo">
+          <span class="ep-n">Passo 02</span>
+          <h3>Validação rápida por vídeo</h3>
+          <p>No horário agendado, você acessa o link pelo celular ou computador com câmera para confirmar sua identidade em poucos minutos, sem sair de casa ou da empresa.</p>
+        </li>
+        <li class="ep-passo" data-titulo-etapa="Etapa 03: Emissão e orientação na instalação">
+          <span class="ep-n">Passo 03</span>
+          <h3>Emissão com suporte na instalação</h3>
+          <p>Assim que a validação é concluída, você recebe o passo a passo e conta com o auxílio da nossa equipe para deixar o certificado funcionando.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       05. POR QUE EMITIR COM A LT CERTIFICADORA (SEGURANÇA E CONFIANÇA)
+       ===================================================================== -->
+  <section class="secao-seguranca" id="seguranca">
+    <div class="conteiner seguranca-grade">
+      <div class="seguranca-esquerda">
+        <span class="rotulo-secao">Credibilidade e Acompanhamento</span>
+        <h2>Segurança jurídica oficial com atendimento descomplicado de ponta a ponta.</h2>
+        <p>Unimos os padrões técnicos exigidos nacionalmente com um atendimento próximo, que fala a sua língua.</p>
+
+        <figure class="ic quadro-seguranca" data-cortina="baixo">
+          <img
+            class="ic-alvo"
+            src="imagens/seguranca-consultiva.jpg"
+            alt="Empresário brasileiro sorrindo em escritório iluminado pelo sol diante do notebook após concluir validação digital"
+            width="1264"
+            height="848"
+            loading="lazy"
+            decoding="async"
+          >
+        </figure>
+      </div>
+
+      <div class="pilares-lista">
+        <article class="pilar-item">
+          <span class="pilar-icone" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3L4 7V12C4 16.5 7.4 20.6 12 22C16.6 20.6 20 16.5 20 12V7L12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12L11 14L15 10" stroke="#E8B040" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <h3>Validade jurídica padrão ICP-Brasil</h3>
+          <p>Assinaturas eletrônicas com o mesmo valor legal de uma assinatura presencial reconhecida em cartório.</p>
+        </article>
+
+        <article class="pilar-item">
+          <span class="pilar-icone" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 15L11 17L15 13" stroke="#E8B040" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <h3>Análise prévia para evitar retrabalho</h3>
+          <p>Conferimos toda a documentação antes da videoconferência para que sua validação ocorra de primeira, sem travas.</p>
+        </article>
+
+        <article class="pilar-item">
+          <span class="pilar-icone" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 15C21 15.5 20.8 16 20.4 16.4C20 16.8 19.5 17 19 17H7L3 21V5C3 4.5 3.2 4 3.6 3.6C4 3.2 4.5 3 5 3H19C19.5 3 20 3.2 20.4 3.6C20.8 4 21 4.5 21 5V15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="2" fill="#E8B040"/></svg>
+          </span>
+          <h3>Atendimento direto e humano</h3>
+          <p>Nada de ficar preso em menus automáticos. Você conversa com especialistas reais pelo WhatsApp.</p>
+        </article>
+
+        <article class="pilar-item">
+          <span class="pilar-icone" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="11" width="16" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V7C8 4.8 9.8 3 12 3C14.2 3 16 4.8 16 7V11" stroke="#E8B040" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <h3>Sigilo e proteção em cada etapa</h3>
+          <p>Validação conduzida dentro das normas oficiais de segurança e criptografia da certificação digital.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       06. PERGUNTAS FREQUENTES (FAQ ANIMADO)
+       ===================================================================== -->
+  <section class="secao-faq" id="duvidas" data-faq>
+    <div class="conteiner fq-grade">
+      <div class="fq-chamada">
+        <span class="rotulo-secao">Tire suas Dúvidas</span>
+        <h2>Tudo o que você precisa saber antes da sua videoconferência.</h2>
+        <p>Separamos os pontos principais sobre documentos, renovação e escolha de mídia para você já ir preparado.</p>
+      </div>
+
+      <div class="fq-lista">
+        <div class="fq-item aberto">
+          <h3>
+            <button class="fq-b" type="button" aria-expanded="true" aria-controls="fq-1">
+              <span>Quais documentos preciso separar?</span>
+              <i aria-hidden="true"></i>
+            </button>
+          </h3>
+          <div class="fq-p" id="fq-1" role="region">
+            <div>
+              <p>Para Pessoa Física (e-CPF), documento oficial com foto (CNH ou RG atualizado) e CPF. Para Pessoa Jurídica (e-CNPJ), o documento com foto do responsável legal na Receita Federal, o ato constitutivo atualizado (Contrato Social, Requerimento de Empresário ou Estatuto) e o cartão CNPJ.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="fq-item">
+          <h3>
+            <button class="fq-b" type="button" aria-expanded="false" aria-controls="fq-2">
+              <span>O que é necessário para fazer a videoconferência?</span>
+              <i aria-hidden="true"></i>
+            </button>
+          </h3>
+          <div class="fq-p" id="fq-2" role="region">
+            <div>
+              <p>Apenas um celular ou computador com câmera, microfone e acesso à internet, além do seu documento de identificação original em mãos.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="fq-item">
+          <h3>
+            <button class="fq-b" type="button" aria-expanded="false" aria-controls="fq-3">
+              <span>Posso tanto emitir um certificado novo quanto renovar o meu atual?</span>
+              <i aria-hidden="true"></i>
+            </button>
+          </h3>
+          <div class="fq-p" id="fq-3" role="region">
+            <div>
+              <p>Sim. Atendemos primeira emissão e renovação para todos os modelos (A1 PF, A1 PJ, A3 PF e A3 PJ) por videoconferência.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="fq-item">
+          <h3>
+            <button class="fq-b" type="button" aria-expanded="false" aria-controls="fq-4">
+              <span>Como funciona se eu escolher o modelo A3 (mídia física)?</span>
+              <i aria-hidden="true"></i>
+            </button>
+          </h3>
+          <div class="fq-p" id="fq-4" role="region">
+            <div>
+              <p>Se você já tiver um token ou cartão compatível, a emissão também é concluída remotamente após a videoconferência. Se precisar adquirir a mídia física, nossa equipe combina o envio ou a entrega diretamente pelo WhatsApp.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- =======================================================================
+     07. CHAMADA FINAL E RODAPÉ INSTITUCIONAL
+     ======================================================================= -->
+<footer class="secao-fechamento secao-escura">
+  <div class="conteiner">
+    <div class="bloco-chamada-final">
+      <div>
+        <span class="rotulo-secao">Atendimento Direto no WhatsApp</span>
+        <h2>Pronto para emitir ou renovar seu certificado digital sem burocracia?</h2>
+        <p>Chame a equipe da LT Certificadora agora no WhatsApp e agende sua videoconferência no melhor horário para a sua rotina.</p>
+      </div>
+      <div>
+        <a class="bt bt-rolo bt-ima" data-ima href="https://api.whatsapp.com/send?phone=557381223553&text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20seu%20site" target="_blank" rel="noopener noreferrer">
+          <span class="bt-m"><span data-t="Falar com a equipe e agendar videoconferência">Falar com a equipe e agendar videoconferência</span></span>
+          <span class="bt-icone" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <div class="rodape-interno">
+      <a class="cb-marca" href="#topo">
+        <span class="marca-simbolo">
+          <img src="imagens/logo-lt.png" alt="" width="132" height="83">
+        </span>
+        <span>LT Certificadora</span>
+      </a>
+
+      <nav class="rodape-links" aria-label="Links do rodapé">
+        <a href="#certificados">Certificados</a>
+        <a href="#comparativo">A1 ou A3</a>
+        <a href="#como-funciona">Como Funciona</a>
+        <a href="#duvidas">Dúvidas</a>
+        <a href="https://api.whatsapp.com/send?phone=557381223553&text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20seu%20site" target="_blank" rel="noopener noreferrer">Canal Direto WhatsApp</a>
+      </nav>
+    </div>
+
+    <div class="rodape-base">
+      <span>LT Certificadora · Certificação Digital e-CPF e e-CNPJ (A1 e A3)</span>
+      <span>Atendimento e agendamento de videoconferência pelo WhatsApp</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* A classe "js" no html arma as animações de entrada. Sem script, tudo fica visível. */
+document.documentElement.classList.add('js');
+
+/* 1. Cabeçalho que reage à rolagem + menu mobile acessível */
+document.querySelectorAll('[data-cabecalho]').forEach(function(cb) {
+  var antes = window.scrollY;
+  var botaoMenu = cb.querySelector('[data-abrir-menu]');
+  var gaveta = cb.querySelector('#menu-mobile');
+
+  function atualizar() {
+    var y = window.scrollY;
+    cb.classList.toggle('rolou', y > 40);
+    if (Math.abs(y - antes) > 6 && (!gaveta || !gaveta.classList.contains('aberto'))) {
+      cb.classList.toggle('some', y > antes && y > 320);
+      antes = y;
+    }
+  }
+  window.addEventListener('scroll', atualizar, { passive: true });
+  atualizar();
+  cb.addEventListener('focusin', function() { cb.classList.remove('some'); });
+
+  if (botaoMenu && gaveta) {
+    function fecharMenu() {
+      gaveta.classList.remove('aberto');
+      botaoMenu.setAttribute('aria-expanded', 'false');
+      botaoMenu.textContent = 'Menu';
+    }
+    botaoMenu.addEventListener('click', function() {
+      var aberto = gaveta.classList.toggle('aberto');
+      botaoMenu.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+      botaoMenu.textContent = aberto ? 'Fechar' : 'Menu';
+    });
+    gaveta.querySelectorAll('[data-link-mobile]').forEach(function(link) {
+      link.addEventListener('click', fecharMenu);
+    });
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && gaveta.classList.contains('aberto')) {
+        fecharMenu();
+        botaoMenu.focus();
+      }
+    });
+  }
+});
+
+/* 2. Sublinhado que desliza no menu desktop */
+document.querySelectorAll('[data-menu-fio]').forEach(function(mu) {
+  var fio = mu.querySelector('.mu-fio');
+  var links = [].slice.call(mu.querySelectorAll('a'));
+  var atual = mu.querySelector('[aria-current]') || links[0];
+  function ir(a) {
+    if (!a || !fio) return;
+    fio.style.width = a.offsetWidth + 'px';
+    fio.style.transform = 'translateX(' + a.offsetLeft + 'px)';
+  }
+  links.forEach(function(a) {
+    a.addEventListener('pointerenter', function() { ir(a); });
+    a.addEventListener('focus', function() { ir(a); });
+  });
+  mu.addEventListener('pointerleave', function() { ir(atual); });
+  window.addEventListener('resize', function() { ir(atual); });
+  window.addEventListener('load', function() { ir(atual); });
+  ir(atual);
+});
+
+/* 3. Botão magnético: só onde há mouse e sem redução de movimento */
+if (window.matchMedia('(hover:hover) and (pointer:fine)').matches && !window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
+  document.querySelectorAll('[data-ima]').forEach(function(b) {
+    b.addEventListener('pointermove', function(e) {
+      var r = b.getBoundingClientRect();
+      var x = (e.clientX - r.left - r.width / 2) * 0.22;
+      var y = (e.clientY - r.top - r.height / 2) * 0.32;
+      b.classList.add('puxando');
+      b.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+    });
+    b.addEventListener('pointerleave', function() {
+      b.classList.remove('puxando');
+      b.style.transform = '';
+    });
+  });
+}
+
+/* 4. Título que entra linha por linha na abertura */
+document.querySelectorAll('[data-linhas]').forEach(function(el) {
+  var texto = el.textContent.trim().split(/\s+/);
+  el.setAttribute('aria-label', texto.join(' '));
+  el.textContent = '';
+  var mascaras = texto.map(function(p, i) {
+    var m = document.createElement('span');
+    m.className = 'tl-m';
+    m.setAttribute('aria-hidden', 'true');
+    var w = document.createElement('span');
+    w.className = 'tl-w';
+    w.textContent = p;
+    m.appendChild(w);
+    el.appendChild(m);
+    if (i < texto.length - 1) el.appendChild(document.createTextNode(' '));
+    return m;
+  });
+  function numerar() {
+    var topo = null, n = -1;
+    mascaras.forEach(function(m) {
+      if (m.offsetTop !== topo) { topo = m.offsetTop; n++; }
+      m.firstChild.style.setProperty('--l', n);
+    });
+  }
+  numerar();
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(numerar);
+  }
+  window.addEventListener('resize', numerar);
+  requestAnimationFrame(function() {
+    numerar();
+    el.classList.add('tl-on');
+  });
+});
+
+/* 5. Etapas presas com progresso na rolagem */
+document.querySelectorAll('[data-etapas]').forEach(function(ep) {
+  var passos = [].slice.call(ep.querySelectorAll('.ep-passo'));
+  var cont = ep.querySelector('[data-etapa-contador]');
+  var legenda = ep.querySelector('[data-etapa-legenda]');
+  var lista = ep.querySelector('.ep-lista');
+  function dois(n) { return (n < 10 ? '0' : '') + n; }
+  function ativar(i) {
+    passos.forEach(function(p, k) { p.classList.toggle('ativo', k === i); });
+    if (cont) cont.textContent = dois(i + 1) + ' / ' + dois(passos.length);
+    if (legenda && passos[i]) legenda.textContent = passos[i].getAttribute('data-titulo-etapa');
+  }
+  var obs = new IntersectionObserver(function(es) {
+    es.forEach(function(e) {
+      if (e.isIntersecting) ativar(passos.indexOf(e.target));
+    });
+  }, { rootMargin: '-40% 0px -40% 0px' });
+  passos.forEach(function(p) { obs.observe(p); });
+  ativar(0);
+  function linha() {
+    if (!lista) return;
+    var r = lista.getBoundingClientRect();
+    var prog = Math.min(1, Math.max(0.15, (window.innerHeight * 0.55 - r.top) / r.height));
+    lista.style.setProperty('--prog', prog);
+  }
+  window.addEventListener('scroll', linha, { passive: true });
+  window.addEventListener('resize', linha);
+  linha();
+});
+
+/* 6. Revelação por cortina na área de imagem da seção de segurança */
+(function() {
+  var figs = document.querySelectorAll('[data-cortina]');
+  var ouviu = false;
+  var obs = new IntersectionObserver(function(es) {
+    ouviu = true;
+    es.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('ic-on');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.25 });
+  figs.forEach(function(f) { obs.observe(f); });
+  setTimeout(function() {
+    if (!ouviu) figs.forEach(function(f) { f.classList.add('ic-on'); });
+  }, 1500);
+})();
+
+/* 7. Perguntas frequentes com abertura suave */
+document.querySelectorAll('[data-faq]').forEach(function(fq) {
+  var itens = [].slice.call(fq.querySelectorAll('.fq-item'));
+  itens.forEach(function(item) {
+    var b = item.querySelector('.fq-b');
+    b.addEventListener('click', function() {
+      var abrir = !item.classList.contains('aberto');
+      itens.forEach(function(o) {
+        o.classList.remove('aberto');
+        o.querySelector('.fq-b').setAttribute('aria-expanded', 'false');
+      });
+      if (abrir) {
+        item.classList.add('aberto');
+        b.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

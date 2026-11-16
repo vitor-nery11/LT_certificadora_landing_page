@@ -108,7 +108,7 @@ body {
   font-weight: var(--peso-normal);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 ::selection {
@@ -366,8 +366,18 @@ p {
   background-color: transparent;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  border-bottom: 1px solid transparent;
-  transition: transform 0.45s var(--curva), padding 0.35s var(--curva), background-color 0.35s var(--curva), backdrop-filter 0.35s var(--curva), border-color 0.35s var(--curva);
+  border: 1px solid transparent;
+  border-radius: 0;
+  transition:
+    top 0.35s var(--curva),
+    left 0.35s var(--curva),
+    right 0.35s var(--curva),
+    border-radius 0.35s var(--curva),
+    padding 0.35s var(--curva),
+    background-color 0.35s var(--curva),
+    backdrop-filter 0.35s var(--curva),
+    border-color 0.35s var(--curva),
+    box-shadow 0.35s var(--curva);
   padding: var(--esp-3) 0;
 }
 
@@ -378,15 +388,25 @@ p {
 }
 
 .cb.rolou {
-  padding: var(--esp-3) 0;
-  background-color: rgba(10, 15, 26, 0.94);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom-color: rgba(255, 255, 255, 0.12);
+  top: var(--esp-3);
+  left: var(--esp-3);
+  right: var(--esp-3);
+  padding: var(--esp-2) 0;
+  background-color: rgba(12, 17, 29, 0.72);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--raio);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
 }
 
-.cb.some {
-  transform: translate3d(0, -110%, 0);
+@media (min-width: 768px) {
+  .cb.rolou {
+    top: var(--esp-4);
+    left: var(--margem);
+    right: var(--margem);
+    padding: var(--esp-3) 0;
+  }
 }
 
 .cb-interno {
@@ -394,6 +414,19 @@ p {
   justify-content: space-between;
   align-items: center;
   gap: var(--esp-3);
+  transition: padding 0.35s var(--curva);
+}
+
+.cb.rolou .cb-interno {
+  padding-left: var(--esp-4);
+  padding-right: var(--esp-4);
+}
+
+@media (min-width: 768px) {
+  .cb.rolou .cb-interno {
+    padding-left: var(--esp-5);
+    padding-right: var(--esp-5);
+  }
 }
 
 .cb-marca {
@@ -532,9 +565,19 @@ p {
 
 .menu-gaveta {
   display: none;
-  background: var(--escuro);
+  background: rgba(12, 17, 29, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid var(--fio-escuro);
   padding: var(--esp-5) var(--margem);
+}
+
+.cb.rolou .menu-gaveta {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  margin-top: var(--esp-2);
+  padding: var(--esp-4) var(--esp-4) var(--esp-3);
 }
 
 .menu-gaveta.aberto {
@@ -1997,21 +2040,14 @@ document.documentElement.classList.add('js');
 
 /* 1. Cabeçalho que reage à rolagem + menu mobile acessível */
 document.querySelectorAll('[data-cabecalho]').forEach(function(cb) {
-  var antes = window.scrollY;
   var botaoMenu = cb.querySelector('[data-abrir-menu]');
   var gaveta = cb.querySelector('#menu-mobile');
 
   function atualizar() {
-    var y = window.scrollY;
-    cb.classList.toggle('rolou', y > 40);
-    if (Math.abs(y - antes) > 6 && (!gaveta || !gaveta.classList.contains('aberto'))) {
-      cb.classList.toggle('some', y > antes && y > 320);
-      antes = y;
-    }
+    cb.classList.toggle('rolou', window.scrollY > 40);
   }
   window.addEventListener('scroll', atualizar, { passive: true });
   atualizar();
-  cb.addEventListener('focusin', function() { cb.classList.remove('some'); });
 
   if (botaoMenu && gaveta) {
     function fecharMenu() {

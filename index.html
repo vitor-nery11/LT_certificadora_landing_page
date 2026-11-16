@@ -637,8 +637,7 @@ p {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: var(--esp-8);
+  justify-content: center;
   padding-top: var(--esp-4);
 }
 
@@ -696,53 +695,6 @@ p {
   gap: var(--esp-4);
 }
 
-/* Barra de 3 selos leves e translúcidos na base da Abertura */
-.abertura-selos {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--esp-3);
-  padding-top: var(--esp-5);
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-@media (min-width: 768px) {
-  .abertura-selos {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 860px;
-  }
-}
-
-.selo-rapido {
-  background: rgba(10, 15, 26, 0.42);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: var(--raio);
-  padding: var(--esp-3) var(--esp-4);
-  display: flex;
-  align-items: center;
-  gap: var(--esp-3);
-}
-
-.selo-ponto {
-  width: var(--esp-2);
-  height: var(--esp-2);
-  border-radius: var(--raio-pilula);
-  background: var(--sol-lt);
-  flex-shrink: 0;
-}
-
-.selo-rapido strong {
-  display: block;
-  font-size: var(--t-rotulo);
-  font-weight: var(--peso-forte);
-  color: var(--tinta-clara);
-}
-
-.selo-rapido span {
-  font-size: 0.75rem;
-  color: #CBD5E1;
-}
 
 /* ==========================================================================
    6. SEÇÃO 2: OS 4 CERTIFICADOS DIGITAIS (PONTA A PONTA)
@@ -1581,30 +1533,6 @@ p {
               </span>
             </a>
             <a class="bt-secundario" href="#certificados">Escolher entre A1 e A3</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="abertura-selos" aria-label="Garantias principais">
-        <div class="selo-rapido">
-          <span class="selo-ponto" aria-hidden="true"></span>
-          <div>
-            <strong>Validação por videoconferência</strong>
-            <span>Pelo celular ou computador</span>
-          </div>
-        </div>
-        <div class="selo-rapido">
-          <span class="selo-ponto" aria-hidden="true"></span>
-          <div>
-            <strong>Padrão oficial ICP-Brasil</strong>
-            <span>Validade jurídica nacional</span>
-          </div>
-        </div>
-        <div class="selo-rapido">
-          <span class="selo-ponto" aria-hidden="true"></span>
-          <div>
-            <strong>Atendimento para PF e PJ</strong>
-            <span>Modelos A1 e A3 completos</span>
           </div>
         </div>
       </div>

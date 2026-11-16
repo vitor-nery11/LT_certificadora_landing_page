@@ -1524,7 +1524,7 @@ p {
       <div class="abertura-grade">
         <div class="abertura-texto">
           <span class="rotulo-secao">Sua identidade digital pronta sem sair da rotina</span>
-          <h1 data-linhas>Certificado Digital por Videoconferência</h1>
+          <h1 data-linhas>Certificado<br>Digital por<br>Videoconferência</h1>
           <p class="abertura-subtitulo">Certificados e-CPF e e-CNPJ nos modelos A1 e A3 com validade jurídica em todo o Brasil. Nossa equipe confere sua documentação pelo WhatsApp e acompanha você na validação online.</p>
 
           <div class="abertura-botoes">
@@ -2076,20 +2076,29 @@ if (window.matchMedia('(hover:hover) and (pointer:fine)').matches && !window.mat
 
 /* 4. Título que entra linha por linha na abertura */
 document.querySelectorAll('[data-linhas]').forEach(function(el) {
-  var texto = el.textContent.trim().split(/\s+/);
-  el.setAttribute('aria-label', texto.join(' '));
+  var linhas = el.innerHTML.split(/<br\s*\/?>/i);
+  var textoLimpo = el.textContent.trim().replace(/\s+/g, ' ');
+  el.setAttribute('aria-label', textoLimpo);
   el.textContent = '';
-  var mascaras = texto.map(function(p, i) {
-    var m = document.createElement('span');
-    m.className = 'tl-m';
-    m.setAttribute('aria-hidden', 'true');
-    var w = document.createElement('span');
-    w.className = 'tl-w';
-    w.textContent = p;
-    m.appendChild(w);
-    el.appendChild(m);
-    if (i < texto.length - 1) el.appendChild(document.createTextNode(' '));
-    return m;
+  var mascaras = [];
+  linhas.forEach(function(linhaStr) {
+    var divLinha = document.createElement('span');
+    divLinha.className = 'tl-linha';
+    divLinha.style.display = 'block';
+    var palavras = linhaStr.trim().split(/\s+/).filter(Boolean);
+    palavras.forEach(function(p, i) {
+      var m = document.createElement('span');
+      m.className = 'tl-m';
+      m.setAttribute('aria-hidden', 'true');
+      var w = document.createElement('span');
+      w.className = 'tl-w';
+      w.textContent = p;
+      m.appendChild(w);
+      divLinha.appendChild(m);
+      if (i < palavras.length - 1) divLinha.appendChild(document.createTextNode(' '));
+      mascaras.push(m);
+    });
+    el.appendChild(divLinha);
   });
   function numerar() {
     var topo = null, n = -1;

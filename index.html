@@ -366,7 +366,7 @@ p {
   background-color: rgba(10, 15, 26, 0.45);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid transparent;
   transition: transform 0.45s var(--curva), padding 0.35s var(--curva), background-color 0.35s var(--curva), border-color 0.35s var(--curva);
   padding: var(--esp-3) 0;
 }
@@ -473,7 +473,8 @@ p {
   height: 2px;
   width: 0;
   background: var(--sol-lt);
-  transition: transform 0.45s var(--curva), width 0.45s var(--curva);
+  opacity: 0;
+  transition: transform 0.45s var(--curva), width 0.45s var(--curva), opacity 0.25s var(--curva);
   pointer-events: none;
 }
 
@@ -1478,7 +1479,7 @@ p {
     </a>
 
     <nav class="cb-nav" data-menu-fio aria-label="Navegação principal">
-      <a href="#certificados" aria-current="true">Certificados</a>
+      <a href="#certificados">Certificados</a>
       <a href="#comparativo">A1 ou A3</a>
       <a href="#como-funciona">Como Funciona</a>
       <a href="#duvidas">Dúvidas</a>
@@ -2041,9 +2042,17 @@ document.querySelectorAll('[data-cabecalho]').forEach(function(cb) {
 document.querySelectorAll('[data-menu-fio]').forEach(function(mu) {
   var fio = mu.querySelector('.mu-fio');
   var links = [].slice.call(mu.querySelectorAll('a'));
-  var atual = mu.querySelector('[aria-current]') || links[0];
+  function obterAtual() {
+    return mu.querySelector('[aria-current="true"]');
+  }
   function ir(a) {
-    if (!a || !fio) return;
+    if (!fio) return;
+    if (!a) {
+      fio.style.opacity = '0';
+      fio.style.width = '0px';
+      return;
+    }
+    fio.style.opacity = '1';
     fio.style.width = a.offsetWidth + 'px';
     fio.style.transform = 'translateX(' + a.offsetLeft + 'px)';
   }
@@ -2051,10 +2060,10 @@ document.querySelectorAll('[data-menu-fio]').forEach(function(mu) {
     a.addEventListener('pointerenter', function() { ir(a); });
     a.addEventListener('focus', function() { ir(a); });
   });
-  mu.addEventListener('pointerleave', function() { ir(atual); });
-  window.addEventListener('resize', function() { ir(atual); });
-  window.addEventListener('load', function() { ir(atual); });
-  ir(atual);
+  mu.addEventListener('pointerleave', function() { ir(obterAtual()); });
+  window.addEventListener('resize', function() { ir(obterAtual()); });
+  window.addEventListener('load', function() { ir(obterAtual()); });
+  ir(obterAtual());
 });
 
 /* 3. Botão magnético: só onde há mouse e sem redução de movimento */

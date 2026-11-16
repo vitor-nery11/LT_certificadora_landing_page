@@ -1157,162 +1157,212 @@ p {
 }
 
 /* ==========================================================================
-   8. SEÇÃO 4: COMO FUNCIONA A VIDEOCONFERÊNCIA (COMPONENTE ETAPAS-PRESAS)
+   8. SEÇÃO 4: PRA QUEM? (TRAVA NA ROLAGEM COM TROCA DE TÓPICOS E FOTOS)
    ========================================================================== */
-.secao-etapas {
+.secao-pra-quem {
+  position: relative;
+  background-color: var(--fundo);
   padding: var(--respiro-secao) 0;
 }
 
-.ep-grade {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--esp-8);
-  align-items: start;
+.pq-palco {
+  width: 100%;
 }
 
 @media (min-width: 1024px) {
-  .ep-grade {
-    grid-template-columns: 1fr 1.05fr;
-    gap: var(--esp-9);
+  .secao-pra-quem {
+    padding: 0;
+    height: 360vh;
   }
-  .ep-fixo {
+  .pq-palco {
     position: sticky;
-    top: var(--esp-9);
+    top: 0;
+    height: 100vh;
+    min-height: 640px;
+    display: flex;
+    align-items: center;
+    padding-top: var(--esp-7);
+    overflow: hidden;
   }
 }
 
-.ep-fixo h2 {
-  margin-bottom: var(--esp-4);
+.pq-grade {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--esp-7);
+  align-items: center;
 }
 
-.ep-fixo > p {
-  color: var(--apoio);
-  font-size: var(--t-abertura);
+@media (min-width: 1024px) {
+  .pq-grade {
+    grid-template-columns: 1fr 0.95fr;
+    gap: clamp(48px, 6vw, 96px);
+  }
+}
+
+.pq-esquerda h2 {
+  font-size: clamp(2.25rem, 4.4vw, 3.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--azul-lt);
   margin-bottom: var(--esp-6);
 }
 
-.ep-contador-barra {
+.pq-lista {
+  border-top: 1px solid var(--fio);
+  margin-bottom: var(--esp-6);
+}
+
+.pq-item {
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--esp-4);
+  gap: var(--esp-4);
+  padding: var(--esp-4) 0;
+  border-bottom: 1px solid var(--fio);
+  text-align: left;
+  color: rgba(17, 24, 39, 0.54);
+  transition: color 0.3s var(--curva), padding-left 0.3s var(--curva);
+}
+
+.pq-item-num {
+  font-family: var(--fonte-texto);
   font-size: var(--t-rotulo);
   font-weight: var(--peso-forte);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--destaque);
+  color: var(--azul-lt);
+  min-width: 24px;
+  opacity: 0.72;
+  transition: opacity 0.3s var(--curva);
 }
 
-.painel-etapa-midia {
+.pq-item-titulo {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.125rem, 1.55vw, 1.375rem);
+  font-weight: var(--peso-forte);
+  letter-spacing: -0.02em;
+}
+
+@media (hover: hover) {
+  .pq-item:hover {
+    color: var(--tinta);
+  }
+}
+
+.pq-item.ativo {
+  color: var(--tinta);
+  padding-left: var(--esp-2);
+}
+
+.pq-item.ativo .pq-item-num {
+  opacity: 1;
+}
+
+.pq-detalhe {
   position: relative;
-  aspect-ratio: 16 / 10;
-  border-radius: var(--raio);
-  overflow: hidden;
-  border: 1px solid var(--fio);
+  min-height: 84px;
   margin-bottom: var(--esp-5);
-  background: var(--escuro);
 }
 
-.painel-etapa-midia img {
+.pq-detalhe-painel {
+  transition: opacity 0.35s var(--curva), transform 0.35s var(--curva);
+}
+
+.pq-detalhe-painel[hidden] {
+  display: none;
+}
+
+.pq-detalhe strong {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-size: var(--t-corpo);
+  font-weight: var(--peso-forte);
+  color: var(--tinta);
+  margin-bottom: var(--esp-1);
+}
+
+.pq-detalhe p {
+  font-size: var(--t-corpo);
+  color: var(--apoio);
+  line-height: 1.55;
+  max-width: 50ch;
+}
+
+.pq-progresso {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: var(--fio);
+  overflow: hidden;
+  border-radius: var(--raio-pilula);
+}
+
+.pq-progresso-barra {
+  position: absolute;
+  inset: 0;
+  background: var(--azul-lt);
+  transform-origin: left center;
+  transform: scaleX(var(--pq-prog, 0.25));
+  transition: transform 0.15s linear;
+}
+
+.pq-direita {
+  display: flex;
+  justify-content: center;
+}
+
+.pq-quadro {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 3 / 4;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--superficie-tinta);
+  border: 1px solid var(--fio);
+  box-shadow: 0 24px 60px rgba(17, 24, 39, 0.1);
+}
+
+@media (min-width: 1024px) {
+  .pq-quadro {
+    width: min(100%, calc(74vh * 0.75), 480px);
+  }
+}
+
+.pq-contador {
+  position: absolute;
+  top: var(--esp-4);
+  left: var(--esp-4);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: var(--raio-pilula);
+  background: rgba(17, 24, 39, 0.62);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--tinta-clara);
+  font-size: var(--t-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: 0.04em;
+}
+
+.pq-foto {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity 0.55s var(--curva), transform 0.65s var(--curva);
+  z-index: 1;
 }
 
-.painel-etapa-legenda {
-  position: absolute;
-  left: var(--esp-4);
-  right: var(--esp-4);
-  bottom: var(--esp-4);
-  background: rgba(19, 27, 58, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  color: var(--tinta-clara);
-  padding: var(--esp-3) var(--esp-4);
-  border-radius: var(--esp-3);
-  border: 1px solid var(--fio-escuro);
-  display: flex;
-  align-items: center;
-  gap: var(--esp-3);
-}
-
-.painel-etapa-legenda::before {
-  content: "";
-  width: var(--esp-2);
-  height: var(--esp-2);
-  border-radius: var(--raio-pilula);
-  background: var(--sol-lt);
-  flex-shrink: 0;
-}
-
-.painel-etapa-legenda strong {
-  font-family: var(--fonte-titulo);
-  font-size: var(--t-corpo);
-  font-weight: var(--peso-forte);
-}
-
-.ep-lista {
-  position: relative;
-  display: grid;
-  gap: var(--esp-7);
-}
-
-.ep-lista::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--fio);
-}
-
-.ep-lista::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--destaque);
-  transform-origin: top;
-  transform: scaleY(var(--prog, 0.33));
-}
-
-.ep-passo {
-  padding-left: var(--esp-6);
-  padding-top: var(--esp-4);
-  padding-bottom: var(--esp-4);
-  transition: opacity 0.4s var(--curva);
-}
-
-@media (min-width: 1024px) {
-  .ep-passo {
-    min-height: clamp(200px, 26vh, 300px);
-    opacity: 0.42;
-  }
-  .ep-passo.ativo {
-    opacity: 1;
-  }
-}
-
-.ep-n {
-  display: inline-block;
-  font-size: var(--t-rotulo);
-  font-weight: var(--peso-forte);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--destaque);
-  margin-bottom: var(--esp-3);
-}
-
-.ep-passo h3 {
-  margin-bottom: var(--esp-3);
-}
-
-.ep-passo p {
-  color: var(--apoio);
+.pq-foto.ativo {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 2;
 }
 
 /* ==========================================================================
@@ -1647,7 +1697,7 @@ p {
     <nav class="cb-nav" data-menu-fio aria-label="Navegação principal">
       <a href="#certificados">Certificados</a>
       <a href="#comparativo">A1 ou A3</a>
-      <a href="#como-funciona">Como Funciona</a>
+      <a href="#pra-quem">Pra quem?</a>
       <a href="#duvidas">Dúvidas</a>
       <span class="mu-fio" aria-hidden="true"></span>
     </nav>
@@ -1664,7 +1714,7 @@ p {
   <nav class="menu-gaveta" id="menu-mobile" aria-label="Menu para celular">
     <a href="#certificados" data-link-mobile>Certificados</a>
     <a href="#comparativo" data-link-mobile>A1 ou A3</a>
-    <a href="#como-funciona" data-link-mobile>Como Funciona</a>
+    <a href="#pra-quem" data-link-mobile>Pra quem?</a>
     <a href="#duvidas" data-link-mobile>Dúvidas</a>
   </nav>
 </header>
@@ -2011,59 +2061,103 @@ p {
   </section>
 
   <!-- =====================================================================
-       04. COMO FUNCIONA A EMISSÃO POR VIDEOCONFERÊNCIA (ETAPAS PRESAS)
+       04. PRA QUEM? (TRAVA NA ROLAGEM E TROCA TÓPICO + IMAGEM)
        ===================================================================== -->
-  <section class="secao-etapas" id="como-funciona" data-etapas>
-    <div class="conteiner ep-grade">
-      <div class="ep-fixo">
-        <span class="rotulo-secao">Passo a Passo sem Deslocamento</span>
-        <h2>Do primeiro contato ao certificado pronto em 3 passos simples.</h2>
-        <p>Você não precisa enfrentar trânsito nem esperar em sala de atendimento. Nossa equipe conduz tudo com você.</p>
+  <section class="secao-pra-quem" id="pra-quem" data-pra-quem>
+    <div class="pq-palco">
+      <div class="conteiner pq-grade">
+        <div class="pq-esquerda">
+          <h2>Pra quem?</h2>
 
-        <div class="ep-contador-barra">
-          <span>Etapa em leitura</span>
-          <span data-etapa-contador>01 / 03</span>
-        </div>
+          <div class="pq-lista" role="tablist" aria-label="Públicos atendidos pela LT Certificadora">
+            <button type="button" class="pq-item ativo" role="tab" aria-selected="true" data-pq-indice="0">
+              <span class="pq-item-num">01</span>
+              <span class="pq-item-titulo">Contadores e escritórios</span>
+            </button>
+            <button type="button" class="pq-item" role="tab" aria-selected="false" data-pq-indice="1">
+              <span class="pq-item-num">02</span>
+              <span class="pq-item-titulo">MEI e pequenas empresas</span>
+            </button>
+            <button type="button" class="pq-item" role="tab" aria-selected="false" data-pq-indice="2">
+              <span class="pq-item-num">03</span>
+              <span class="pq-item-titulo">Médicos, advogados, engenheiros</span>
+            </button>
+            <button type="button" class="pq-item" role="tab" aria-selected="false" data-pq-indice="3">
+              <span class="pq-item-num">04</span>
+              <span class="pq-item-titulo">Brasileiros no exterior</span>
+            </button>
+          </div>
 
-        <div class="painel-etapa-midia">
-          <img
-            src="imagens/processo-videoconferencia.jpg"
-            alt="Mesa de trabalho iluminada pela luz da manhã com notebook e smartphone posicionados para videoconferência"
-            width="1376"
-            height="768"
-            loading="lazy"
-            decoding="async"
-          >
-          <div class="painel-etapa-legenda">
-            <strong data-etapa-legenda>Etapa 01: Conferência rápida no WhatsApp</strong>
+          <div class="pq-detalhe">
+            <div class="pq-detalhe-painel" data-pq-detalhe="0">
+              <strong>Emita para os seus clientes sem deslocar ninguém</strong>
+              <p>O sócio entra na videoconferência de onde estiver. Você acompanha tudo pelo WhatsApp.</p>
+            </div>
+            <div class="pq-detalhe-painel" data-pq-detalhe="1" hidden>
+              <strong>Nota fiscal e obrigações em dia sem fila</strong>
+              <p>Valide seu e-CNPJ A1 ou A3 direto da sua loja ou escritório e comece a emitir notas no mesmo dia.</p>
+            </div>
+            <div class="pq-detalhe-painel" data-pq-detalhe="2" hidden>
+              <strong>Assinatura digital para conselhos e sistemas oficiais</strong>
+              <p>Assine prontuários, petições, projetos e laudos com validade jurídica em todo o território nacional.</p>
+            </div>
+            <div class="pq-detalhe-painel" data-pq-detalhe="3" hidden>
+              <strong>Emissão ou renovação do exterior sem procuração</strong>
+              <p>Mesmo morando fora do Brasil, você realiza a validação online por chamada de vídeo com suporte em português.</p>
+            </div>
+          </div>
+
+          <div class="pq-progresso" aria-hidden="true">
+            <div class="pq-progresso-barra" data-pq-barra></div>
           </div>
         </div>
 
-        <a class="bt bt-rolo" href="https://api.whatsapp.com/send?phone=557381223553&text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20seu%20site" target="_blank" rel="noopener noreferrer">
-          <span class="bt-m"><span data-t="Agendar videoconferência no WhatsApp">Agendar videoconferência no WhatsApp</span></span>
-          <span class="bt-icone" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-        </a>
+        <div class="pq-direita">
+          <div class="pq-quadro">
+            <span class="pq-contador" data-pq-contador>01 / 04</span>
+            <img
+              class="pq-foto ativo"
+              data-pq-foto="0"
+              src="imagens/pra-quem-contadores.jpg"
+              alt="Mesa de contabilidade organizada sob luz natural com balancete e anotações"
+              width="896"
+              height="1200"
+              loading="lazy"
+              decoding="async"
+            >
+            <img
+              class="pq-foto"
+              data-pq-foto="1"
+              src="imagens/pra-quem-mei.jpg"
+              alt="Empreendedora trabalhando em notebook em seu estúdio iluminado"
+              width="896"
+              height="1200"
+              loading="lazy"
+              decoding="async"
+            >
+            <img
+              class="pq-foto"
+              data-pq-foto="2"
+              src="imagens/pra-quem-profissionais.jpg"
+              alt="Profissional liberal sorrindo com tablet e caneta digital em escritório contemporâneo"
+              width="896"
+              height="1200"
+              loading="lazy"
+              decoding="async"
+            >
+            <img
+              class="pq-foto"
+              data-pq-foto="3"
+              src="imagens/pra-quem-exterior.jpg"
+              alt="Brasileira trabalhando remotamente ao lado de janela ampla com vista internacional"
+              width="896"
+              height="1200"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+        </div>
       </div>
-
-      <ol class="ep-lista">
-        <li class="ep-passo ativo" data-titulo-etapa="Etapa 01: Conferência rápida no WhatsApp">
-          <span class="ep-n">Passo 01</span>
-          <h3>Conferência e agendamento no WhatsApp</h3>
-          <p>Você chama nossa equipe, informa se precisa de e-CPF ou e-CNPJ, envia os documentos para análise prévia e escolhe o melhor horário.</p>
-        </li>
-        <li class="ep-passo" data-titulo-etapa="Etapa 02: Validação rápida por chamada de vídeo">
-          <span class="ep-n">Passo 02</span>
-          <h3>Validação rápida por vídeo</h3>
-          <p>No horário agendado, você acessa o link pelo celular ou computador com câmera para confirmar sua identidade em poucos minutos, sem sair de casa ou da empresa.</p>
-        </li>
-        <li class="ep-passo" data-titulo-etapa="Etapa 03: Emissão e orientação na instalação">
-          <span class="ep-n">Passo 03</span>
-          <h3>Emissão com suporte na instalação</h3>
-          <p>Assim que a validação é concluída, você recebe o passo a passo e conta com o auxílio da nossa equipe para deixar o certificado funcionando.</p>
-        </li>
-      </ol>
     </div>
   </section>
 
@@ -2231,7 +2325,7 @@ p {
       <nav class="rodape-links" aria-label="Links do rodapé">
         <a href="#certificados">Certificados</a>
         <a href="#comparativo">A1 ou A3</a>
-        <a href="#como-funciona">Como Funciona</a>
+        <a href="#pra-quem">Pra quem?</a>
         <a href="#duvidas">Dúvidas</a>
         <a href="https://api.whatsapp.com/send?phone=557381223553&text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20seu%20site" target="_blank" rel="noopener noreferrer">Canal Direto WhatsApp</a>
       </nav>
@@ -2371,34 +2465,71 @@ document.querySelectorAll('[data-linhas]').forEach(function(el) {
   });
 });
 
-/* 5. Etapas presas com progresso na rolagem */
-document.querySelectorAll('[data-etapas]').forEach(function(ep) {
-  var passos = [].slice.call(ep.querySelectorAll('.ep-passo'));
-  var cont = ep.querySelector('[data-etapa-contador]');
-  var legenda = ep.querySelector('[data-etapa-legenda]');
-  var lista = ep.querySelector('.ep-lista');
+/* 5. Pra quem?: trava a seção na rolagem e troca tópico + fotografia */
+document.querySelectorAll('[data-pra-quem]').forEach(function(pq) {
+  var itens = [].slice.call(pq.querySelectorAll('[data-pq-indice]'));
+  var paineis = [].slice.call(pq.querySelectorAll('[data-pq-detalhe]'));
+  var fotos = [].slice.call(pq.querySelectorAll('[data-pq-foto]'));
+  var contador = pq.querySelector('[data-pq-contador]');
+  var barra = pq.querySelector('[data-pq-barra]');
+  var atual = -1;
+
   function dois(n) { return (n < 10 ? '0' : '') + n; }
-  function ativar(i) {
-    passos.forEach(function(p, k) { p.classList.toggle('ativo', k === i); });
-    if (cont) cont.textContent = dois(i + 1) + ' / ' + dois(passos.length);
-    if (legenda && passos[i]) legenda.textContent = passos[i].getAttribute('data-titulo-etapa');
-  }
-  var obs = new IntersectionObserver(function(es) {
-    es.forEach(function(e) {
-      if (e.isIntersecting) ativar(passos.indexOf(e.target));
+
+  function ativar(idx) {
+    if (idx === atual || idx < 0 || idx >= itens.length) return;
+    atual = idx;
+    itens.forEach(function(b, k) {
+      var ativo = k === idx;
+      b.classList.toggle('ativo', ativo);
+      b.setAttribute('aria-selected', ativo ? 'true' : 'false');
     });
-  }, { rootMargin: '-40% 0px -40% 0px' });
-  passos.forEach(function(p) { obs.observe(p); });
-  ativar(0);
-  function linha() {
-    if (!lista) return;
-    var r = lista.getBoundingClientRect();
-    var prog = Math.min(1, Math.max(0.15, (window.innerHeight * 0.55 - r.top) / r.height));
-    lista.style.setProperty('--prog', prog);
+    paineis.forEach(function(p, k) {
+      if (k === idx) p.removeAttribute('hidden');
+      else p.setAttribute('hidden', '');
+    });
+    fotos.forEach(function(f, k) {
+      f.classList.toggle('ativo', k === idx);
+    });
+    if (contador) contador.textContent = dois(idx + 1) + ' / ' + dois(itens.length);
   }
-  window.addEventListener('scroll', linha, { passive: true });
-  window.addEventListener('resize', linha);
-  linha();
+
+  function atualizarRolagem() {
+    if (window.innerWidth < 1024) return;
+    var r = pq.getBoundingClientRect();
+    var maxScroll = pq.offsetHeight - window.innerHeight;
+    if (maxScroll <= 0) return;
+    var p = Math.min(1, Math.max(0, -r.top / maxScroll));
+    var idx = Math.min(itens.length - 1, Math.floor(p * itens.length * 0.999));
+    ativar(idx);
+    if (barra) barra.style.setProperty('--pq-prog', Math.max(0.08, p).toFixed(4));
+  }
+
+  itens.forEach(function(btn, idx) {
+    btn.addEventListener('click', function() {
+      if (window.innerWidth >= 1024) {
+        var maxScroll = pq.offsetHeight - window.innerHeight;
+        var destino = pq.offsetTop + ((idx + 0.35) / itens.length) * maxScroll;
+        window.scrollTo({ top: destino, behavior: 'smooth' });
+      } else {
+        ativar(idx);
+        if (barra) barra.style.setProperty('--pq-prog', ((idx + 1) / itens.length).toFixed(4));
+      }
+    });
+  });
+
+  window.addEventListener('scroll', atualizarRolagem, { passive: true });
+  window.addEventListener('resize', function() {
+    if (window.innerWidth < 1024 && barra) {
+      barra.style.setProperty('--pq-prog', ((Math.max(0, atual) + 1) / itens.length).toFixed(4));
+    } else {
+      atualizarRolagem();
+    }
+  });
+
+  ativar(0);
+  if (barra) barra.style.setProperty('--pq-prog', '0.08');
+  atualizarRolagem();
 });
 
 /* 6. Revelação por cortina na área de imagem da seção de segurança */

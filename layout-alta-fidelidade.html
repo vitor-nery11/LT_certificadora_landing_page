@@ -741,6 +741,131 @@ p {
 
 
 /* ==========================================================================
+   5B. FAIXA DE CONFIANÇA: EMPRESAS QUE CONFIAM EM NÓS (MARQUEE CONTÍNUO)
+   ========================================================================== */
+.secao-empresas {
+  background-color: var(--superficie);
+  border-bottom: 1px solid var(--fio);
+  padding: var(--esp-6) 0;
+  overflow: hidden;
+}
+
+.empresas-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--esp-5);
+  text-align: center;
+}
+
+.empresas-rotulo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+  font-size: var(--t-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--discreto);
+}
+
+.empresas-rotulo::before {
+  content: "";
+  width: var(--esp-2);
+  height: var(--esp-2);
+  border-radius: var(--raio-pilula);
+  background: var(--destaque);
+  flex-shrink: 0;
+}
+
+.marquee-janela {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+.marquee-trilho {
+  display: flex;
+  width: max-content;
+  animation: marquee-deslizar 34s linear infinite;
+}
+
+@media (hover: hover) {
+  .marquee-janela:hover .marquee-trilho {
+    animation-play-state: paused;
+  }
+}
+
+.marquee-grupo {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-4);
+  padding-right: var(--esp-4);
+  flex-shrink: 0;
+}
+
+.empresa-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-3);
+  padding: var(--esp-3) var(--esp-5);
+  border-radius: var(--raio-pilula);
+  background-color: var(--fundo);
+  border: 1px solid var(--fio);
+  color: var(--apoio);
+  font-family: var(--fonte-titulo);
+  font-size: var(--t-corpo);
+  font-weight: var(--peso-forte);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition: border-color 0.25s var(--curva), color 0.25s var(--curva), background-color 0.25s var(--curva);
+}
+
+.empresa-item svg {
+  width: 22px;
+  height: 22px;
+  color: var(--destaque);
+  flex-shrink: 0;
+}
+
+@media (hover: hover) {
+  .empresa-item:hover {
+    color: var(--tinta);
+    border-color: var(--destaque);
+    background-color: var(--superficie-tinta);
+  }
+}
+
+@keyframes marquee-deslizar {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-trilho {
+    animation: none;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--esp-3);
+  }
+  .marquee-grupo[aria-hidden="true"] {
+    display: none;
+  }
+  .marquee-grupo {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-right: 0;
+  }
+}
+
+/* ==========================================================================
    6. SEÇÃO 2: OS 4 CERTIFICADOS DIGITAIS (PONTA A PONTA)
    ========================================================================== */
 .secao-certificados {
@@ -1577,6 +1702,91 @@ p {
               </span>
             </a>
             <a class="bt-secundario" href="#certificados">Escolher entre A1 e A3</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       01B. EMPRESAS QUE CONFIAM EM NÓS (MARQUEE DE PROVA SOCIAL)
+       ===================================================================== -->
+  <section class="secao-empresas" aria-label="Empresas que confiam em nós">
+    <div class="conteiner">
+      <div class="empresas-cabecalho">
+        <span class="empresas-rotulo">Empresas que confiam em nós</span>
+      </div>
+    </div>
+
+    <div class="marquee-janela">
+      <div class="marquee-trilho">
+        <div class="marquee-grupo">
+          <div class="empresa-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2"/><rect x="13" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M13 7H21M3 17H11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Contábil Alvorada</span>
+          </div>
+          <div class="empresa-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3L21 19H3L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="14" r="2" fill="currentColor"/></svg>
+            <span>Vértice Engenharia</span>
+          </div>
+          <div class="empresa-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M3 12H21M12 3C14.5 6 14.5 18 12 21M12 3C9.5 6 9.5 18 12 21" stroke="currentColor" stroke-width="1.8"/></svg>
+            <span>Norte Sul Logística</span>
+          </div>
+          <div class="empresa-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/></svg>
+            <span>Clínica Vida Plena</span>
+          </div>
+          <div class="empresa-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3V21M6 7H18M4 13L6 7L8 13C8 14.1 7.1 15 6 15C4.9 15 4 14.1 4 13ZM16 13L18 7L20 13C20 14.1 19.1 15 18 15C16.9 15 16 14.1 16 13Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Mendes &amp; Rocha Advogados</span>
+          </div>
+          <div class="empresa-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3C16.97 3 21 7.03 21 12C21 16.97 16.97 21 12 21C7.03 21 3 16.97 3 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 14L12 8L16 14H8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            <span>Grupo Terra Nova</span>
+          </div>
+          <div class="empresa-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 16L9 11L13 15L20 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 8H20V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Horizonte Tech</span>
+          </div>
+          <div class="empresa-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L19 5V11C19 16 15.9 20.4 12 22C8.1 20.4 5 16 5 11V5L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9.5 12L11.2 13.7L15 9.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Prime Fiscal Assessoria</span>
+          </div>
+        </div>
+
+        <div class="marquee-grupo" aria-hidden="true">
+          <div class="empresa-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2"/><rect x="13" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2"/><path d="M13 7H21M3 17H11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Contábil Alvorada</span>
+          </div>
+          <div class="empresa-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3L21 19H3L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="14" r="2" fill="currentColor"/></svg>
+            <span>Vértice Engenharia</span>
+          </div>
+          <div class="empresa-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M3 12H21M12 3C14.5 6 14.5 18 12 21M12 3C9.5 6 9.5 18 12 21" stroke="currentColor" stroke-width="1.8"/></svg>
+            <span>Norte Sul Logística</span>
+          </div>
+          <div class="empresa-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/></svg>
+            <span>Clínica Vida Plena</span>
+          </div>
+          <div class="empresa-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3V21M6 7H18M4 13L6 7L8 13C8 14.1 7.1 15 6 15C4.9 15 4 14.1 4 13ZM16 13L18 7L20 13C20 14.1 19.1 15 18 15C16.9 15 16 14.1 16 13Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Mendes &amp; Rocha Advogados</span>
+          </div>
+          <div class="empresa-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3C16.97 3 21 7.03 21 12C21 16.97 16.97 21 12 21C7.03 21 3 16.97 3 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 14L12 8L16 14H8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            <span>Grupo Terra Nova</span>
+          </div>
+          <div class="empresa-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 16L9 11L13 15L20 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 8H20V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Horizonte Tech</span>
+          </div>
+          <div class="empresa-item">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L19 5V11C19 16 15.9 20.4 12 22C8.1 20.4 5 16 5 11V5L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9.5 12L11.2 13.7L15 9.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Prime Fiscal Assessoria</span>
           </div>
         </div>
       </div>

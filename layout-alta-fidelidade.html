@@ -116,6 +116,12 @@ body {
   color: var(--tinta-clara);
 }
 
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -327,8 +333,10 @@ p {
   min-height: 48px;
   padding: var(--esp-3) var(--esp-5);
   border-radius: var(--raio-pilula);
-  border: 1px solid var(--fio-escuro);
-  background: rgba(19, 27, 58, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: var(--tinta-clara);
   font-size: var(--t-corpo);
   font-weight: var(--peso-forte);
@@ -338,7 +346,7 @@ p {
 @media (hover: hover) {
   .bt-secundario:hover {
     border-color: var(--sol-lt);
-    background-color: rgba(244, 247, 245, 0.1);
+    background-color: rgba(255, 255, 255, 0.14);
   }
 }
 
@@ -347,109 +355,7 @@ p {
 }
 
 /* ==========================================================================
-   4. SUPERFÍCIES DE RESERVA DE IMAGEM (ETAPA 5A: SEM IMAGENS FINAIS)
-   ========================================================================== */
-.reserva-midia {
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--raio);
-  background-color: var(--escuro-superficie);
-  border: 1px dashed rgba(232, 176, 64, 0.45);
-  padding: var(--esp-5);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: var(--tinta-clara);
-}
-
-@media (min-width: 640px) {
-  .reserva-midia {
-    padding: var(--esp-6);
-  }
-}
-
-.reserva-midia.clara {
-  background-color: var(--superficie-tinta);
-  border-color: rgba(46, 125, 71, 0.38);
-  color: var(--tinta);
-}
-
-.reserva-topo {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--esp-2);
-}
-
-.reserva-etiqueta {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--esp-2);
-  padding: var(--esp-1) var(--esp-3);
-  border-radius: var(--raio-pilula);
-  background: rgba(232, 176, 64, 0.16);
-  color: var(--sol-lt);
-  font-size: var(--t-rotulo);
-  font-weight: var(--peso-forte);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.reserva-midia.clara .reserva-etiqueta {
-  background: rgba(46, 125, 71, 0.12);
-  color: var(--destaque);
-}
-
-.reserva-proporcao {
-  font-size: var(--t-rotulo);
-  font-weight: var(--peso-forte);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--apoio-claro);
-}
-
-.reserva-midia.clara .reserva-proporcao {
-  color: var(--apoio);
-}
-
-.reserva-ficha {
-  margin: var(--esp-4) 0;
-  display: grid;
-  gap: var(--esp-2);
-}
-
-.reserva-ficha strong {
-  font-family: var(--fonte-titulo);
-  font-size: var(--t-subtitulo);
-  font-weight: var(--peso-forte);
-}
-
-.reserva-ficha p {
-  font-size: var(--t-corpo);
-  color: var(--apoio-claro);
-}
-
-.reserva-midia.clara .reserva-ficha p {
-  color: var(--apoio);
-}
-
-.reserva-rodape {
-  font-size: var(--t-rotulo);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--discreto-claro);
-  padding-top: var(--esp-3);
-  border-top: 1px solid var(--fio-escuro);
-}
-
-.reserva-midia.clara .reserva-rodape {
-  color: var(--discreto);
-  border-top-color: var(--fio);
-}
-
-/* ==========================================================================
-   5. CABEÇALHO VIVO (COMPONENTE CABECALHO-ROLAGEM)
+   4. CABEÇALHO VIVO (COMPONENTE CABECALHO-ROLAGEM)
    ========================================================================== */
 .cb {
   position: fixed;
@@ -457,11 +363,11 @@ p {
   right: 0;
   top: 0;
   z-index: var(--z-cabecalho);
-  background-color: rgba(19, 27, 58, 0.86);
+  background-color: rgba(10, 15, 26, 0.45);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--fio-escuro);
-  transition: transform 0.45s var(--curva), padding 0.35s var(--curva), background-color 0.35s var(--curva);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.45s var(--curva), padding 0.35s var(--curva), background-color 0.35s var(--curva), border-color 0.35s var(--curva);
   padding: var(--esp-3) 0;
 }
 
@@ -473,7 +379,8 @@ p {
 
 .cb.rolou {
   padding: var(--esp-3) 0;
-  background-color: rgba(19, 27, 58, 0.96);
+  background-color: rgba(10, 15, 26, 0.94);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
 }
 
 .cb.some {
@@ -514,7 +421,7 @@ p {
 }
 
 .marca-simbolo {
-  width: 36px;
+  width: 44px;
   height: 36px;
   border-radius: var(--esp-2);
   background: var(--superficie);
@@ -522,11 +429,18 @@ p {
   place-items: center;
   padding: var(--esp-1);
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.marca-simbolo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 @media (min-width: 640px) {
   .marca-simbolo {
-    width: 40px;
+    width: 48px;
     height: 40px;
     border-radius: var(--esp-3);
   }
@@ -648,81 +562,72 @@ p {
 }
 
 /* ==========================================================================
-   6. SEÇÃO 1: ABERTURA (HERO DE TELA CHEIA COM IMAGEM DE FUNDO PONTA A PONTA)
+   5. SEÇÃO 1: ABERTURA (HERO DE TELA CHEIA COM FOTOGRAFIA DE FUNDO)
    ========================================================================== */
 .abertura {
   position: relative;
   overflow: hidden;
-  background-color: var(--escuro);
+  background-color: #0c1017;
   color: var(--tinta-clara);
-  padding-top: calc(var(--esp-9) + var(--esp-5));
+  padding-top: calc(var(--esp-9) + var(--esp-6));
   padding-bottom: var(--esp-8);
-  min-height: clamp(680px, 100dvh, 980px);
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-/* Camada 0: Reserva da Imagem de Fundo de Ponta a Ponta (100% da tela da Abertura) */
+/* Camada 0: Fotografia real cobrindo 100% da Abertura de ponta a ponta */
 .abertura-fundo {
   position: absolute;
   inset: 0;
   z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 78% 36%, rgba(232, 176, 64, 0.34) 0%, rgba(232, 176, 64, 0) 40%),
-    radial-gradient(circle at 66% 62%, rgba(46, 125, 71, 0.42) 0%, rgba(46, 125, 71, 0) 48%),
-    radial-gradient(circle at 84% 22%, rgba(68, 80, 156, 0.65) 0%, rgba(19, 27, 58, 0) 54%),
-    linear-gradient(120deg, var(--escuro) 0%, var(--escuro-superficie) 52%, #243870 100%);
+  background-color: #0c1017;
 }
 
-.abertura-fundo-arte {
-  position: absolute;
-  inset: 0;
+.abertura-foto-fundo {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.9;
+  object-position: center center;
 }
 
-/* Malha arquitetônica indicando a superfície da fotografia de fundo em 5A */
-.abertura-fundo::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, rgba(244, 247, 245, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(244, 247, 245, 0.05) 1px, transparent 1px);
-  background-size: 64px 64px;
+@media (min-width: 1024px) {
+  .abertura-foto-fundo {
+    object-position: 65% center;
+  }
 }
 
-/* Véu escuro direcional sobre a imagem de fundo para leitura perfeita do título */
+/* Véu suave e neutro (sem azul) para máxima visibilidade da fotografia e leitura perfeita */
 .abertura-fundo::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(19, 27, 58, 0.96) 0%,
-    rgba(19, 27, 58, 0.84) 44%,
-    rgba(19, 27, 58, 0.28) 100%
-  );
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.45) 0%,
+      rgba(0, 0, 0, 0.08) 32%,
+      rgba(0, 0, 0, 0.12) 68%,
+      rgba(0, 0, 0, 0.6) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.78) 0%,
+      rgba(0, 0, 0, 0.58) 42%,
+      rgba(0, 0, 0, 0.14) 72%,
+      rgba(0, 0, 0, 0) 100%
+    );
 }
 
-/* Moldura pontilhada de ponta a ponta sinalizando a área 100% da imagem de fundo */
-.abertura-enquadramento-fundo {
-  display: none;
-}
-
-@media (min-width: 1024px) {
-  .abertura-enquadramento-fundo {
-    display: block;
-    position: absolute;
-    inset: calc(var(--esp-9) + var(--esp-2)) var(--esp-4) var(--esp-4) var(--esp-4);
-    border: 1px dashed rgba(232, 176, 64, 0.42);
-    border-radius: var(--raio);
-    z-index: 0;
-    pointer-events: none;
+@media (max-width: 1023px) {
+  .abertura-fundo::after {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.72) 0%,
+      rgba(0, 0, 0, 0.55) 50%,
+      rgba(0, 0, 0, 0.82) 100%
+    );
   }
 }
 
@@ -740,8 +645,7 @@ p {
 .abertura-grade {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--esp-7);
-  align-items: end;
+  max-width: 820px;
   margin: auto 0;
 }
 
@@ -749,17 +653,10 @@ p {
   min-width: 0;
 }
 
-@media (min-width: 1024px) {
-  .abertura-grade {
-    grid-template-columns: 1.25fr 0.95fr;
-    gap: var(--esp-8);
-    align-items: center;
-  }
-}
-
 .abertura-texto h1 {
   margin-bottom: var(--esp-5);
-  max-width: 18ch;
+  max-width: 17ch;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Componente texto-linhas */
@@ -786,9 +683,10 @@ p {
 
 .abertura-subtitulo {
   font-size: var(--t-abertura);
-  color: var(--apoio-claro);
+  color: #E2E8F0;
   margin-bottom: var(--esp-6);
-  max-width: 56ch;
+  max-width: 52ch;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
 }
 
 .abertura-botoes {
@@ -798,135 +696,56 @@ p {
   gap: var(--esp-4);
 }
 
-/* Coluna direita da Abertura: ficha da imagem de fundo + Cartão de Assinatura Solar */
-.abertura-ancora-fundo {
-  display: flex;
-  flex-direction: column;
-  gap: var(--esp-5);
-  justify-content: flex-end;
-}
-
-@media (min-width: 1024px) {
-  .abertura-ancora-fundo {
-    align-items: flex-end;
-  }
-}
-
-.ficha-hero-fundo {
-  width: 100%;
-  max-width: 540px;
-  background: rgba(19, 27, 58, 0.72);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px dashed rgba(232, 176, 64, 0.65);
-}
-
-.cartao-assinatura {
-  width: 100%;
-  max-width: 540px;
-  background: var(--superficie);
-  color: var(--tinta);
-  border-radius: var(--raio);
-  padding: var(--esp-4) var(--esp-5);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--esp-4);
-  border: 2px solid var(--sol-lt);
-}
-
-.cartao-assinatura-info {
-  display: flex;
-  align-items: center;
-  gap: var(--esp-3);
-}
-
-.cartao-assinatura-info strong {
-  display: block;
-  font-family: var(--fonte-titulo);
-  font-size: var(--t-corpo);
-  font-weight: var(--peso-forte);
-}
-
-.cartao-assinatura-info span {
-  font-size: var(--t-rotulo);
-  color: var(--apoio);
-}
-
-.cartao-assinatura-status {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--esp-2);
-  background: rgba(46, 125, 71, 0.12);
-  color: var(--destaque);
-  padding: var(--esp-2) var(--esp-3);
-  border-radius: var(--raio-pilula);
-  font-size: var(--t-rotulo);
-  font-weight: var(--peso-forte);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.cartao-assinatura-status::before {
-  content: "";
-  width: var(--esp-2);
-  height: var(--esp-2);
-  border-radius: var(--raio-pilula);
-  background: var(--destaque);
-}
-
-/* Barra de 3 selos translúcidos na base da Abertura de ponta a ponta */
+/* Barra de 3 selos leves e translúcidos na base da Abertura */
 .abertura-selos {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--esp-4);
-  padding-top: var(--esp-6);
-  border-top: 1px solid var(--fio-escuro);
+  gap: var(--esp-3);
+  padding-top: var(--esp-5);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 @media (min-width: 768px) {
   .abertura-selos {
     grid-template-columns: repeat(3, 1fr);
+    max-width: 860px;
   }
 }
 
 .selo-rapido {
-  background: rgba(19, 27, 58, 0.68);
+  background: rgba(10, 15, 26, 0.42);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--fio-escuro);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--raio);
-  padding: var(--esp-4) var(--esp-5);
+  padding: var(--esp-3) var(--esp-4);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--esp-3);
 }
 
 .selo-ponto {
-  width: var(--esp-3);
-  height: var(--esp-3);
+  width: var(--esp-2);
+  height: var(--esp-2);
   border-radius: var(--raio-pilula);
   background: var(--sol-lt);
-  margin-top: var(--esp-1);
   flex-shrink: 0;
 }
 
 .selo-rapido strong {
   display: block;
-  font-size: var(--t-corpo);
+  font-size: var(--t-rotulo);
   font-weight: var(--peso-forte);
   color: var(--tinta-clara);
 }
 
 .selo-rapido span {
-  font-size: var(--t-rotulo);
-  color: var(--apoio-claro);
+  font-size: 0.75rem;
+  color: #CBD5E1;
 }
 
 /* ==========================================================================
-   7. SEÇÃO 2: OS 4 CERTIFICADOS DIGITAIS (PONTA A PONTA)
+   6. SEÇÃO 2: OS 4 CERTIFICADOS DIGITAIS (PONTA A PONTA)
    ========================================================================== */
 .secao-certificados {
   padding: var(--respiro-secao) 0;
@@ -974,12 +793,18 @@ p {
   background: var(--superficie);
   border: 1px solid var(--fio);
   border-radius: var(--raio);
-  padding: var(--esp-6);
+  padding: var(--esp-5);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: var(--esp-5);
   transition: transform 0.25s var(--curva), border-color 0.25s var(--curva);
+}
+
+@media (min-width: 640px) {
+  .cartao-certificado {
+    padding: var(--esp-6);
+  }
 }
 
 @media (hover: hover) {
@@ -1000,10 +825,30 @@ p {
   color: var(--apoio-claro);
 }
 
-.reserva-credencial {
-  min-height: 140px;
-  gap: var(--esp-3);
-  padding: var(--esp-4);
+.cartao-midia {
+  aspect-ratio: 16 / 9;
+  border-radius: var(--esp-3);
+  overflow: hidden;
+  border: 1px solid var(--fio);
+  background: var(--superficie-tinta);
+}
+
+.cartao-certificado.destaque-pj .cartao-midia {
+  border-color: var(--fio-escuro);
+  background: var(--escuro-superficie);
+}
+
+.cartao-midia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--curva);
+}
+
+@media (hover: hover) {
+  .cartao-certificado:hover .cartao-midia img {
+    transform: scale(1.03);
+  }
 }
 
 .etiquetas-certificado {
@@ -1079,6 +924,7 @@ p {
   color: var(--destaque);
   display: inline-grid;
   place-items: center;
+  flex-shrink: 0;
   transition: transform 0.2s var(--curva);
 }
 
@@ -1094,7 +940,7 @@ p {
 }
 
 /* ==========================================================================
-   8. SEÇÃO 3: COMPARATIVO A1 OU A3 (QUEBRA DE RITMO EM BLOCO ESCURO)
+   7. SEÇÃO 3: COMPARATIVO A1 OU A3 (QUEBRA DE RITMO EM BLOCO ESCURO)
    ========================================================================== */
 .secao-comparativo {
   background-color: var(--escuro);
@@ -1190,7 +1036,7 @@ p {
 }
 
 /* ==========================================================================
-   9. SEÇÃO 4: COMO FUNCIONA A VIDEOCONFERÊNCIA (COMPONENTE ETAPAS-PRESAS)
+   8. SEÇÃO 4: COMO FUNCIONA A VIDEOCONFERÊNCIA (COMPONENTE ETAPAS-PRESAS)
    ========================================================================== */
 .secao-etapas {
   padding: var(--respiro-secao) 0;
@@ -1224,21 +1070,65 @@ p {
   margin-bottom: var(--esp-6);
 }
 
-.reserva-etapa-painel {
-  aspect-ratio: 16 / 10;
-  margin-bottom: var(--esp-5);
-}
-
 .ep-contador-barra {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--esp-5);
+  margin-bottom: var(--esp-4);
   font-size: var(--t-rotulo);
   font-weight: var(--peso-forte);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--destaque);
+}
+
+.painel-etapa-midia {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--raio);
+  overflow: hidden;
+  border: 1px solid var(--fio);
+  margin-bottom: var(--esp-5);
+  background: var(--escuro);
+}
+
+.painel-etapa-midia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.painel-etapa-legenda {
+  position: absolute;
+  left: var(--esp-4);
+  right: var(--esp-4);
+  bottom: var(--esp-4);
+  background: rgba(19, 27, 58, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--tinta-clara);
+  padding: var(--esp-3) var(--esp-4);
+  border-radius: var(--esp-3);
+  border: 1px solid var(--fio-escuro);
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+}
+
+.painel-etapa-legenda::before {
+  content: "";
+  width: var(--esp-2);
+  height: var(--esp-2);
+  border-radius: var(--raio-pilula);
+  background: var(--sol-lt);
+  flex-shrink: 0;
+}
+
+.painel-etapa-legenda strong {
+  font-family: var(--fonte-titulo);
+  font-size: var(--t-corpo);
+  font-weight: var(--peso-forte);
 }
 
 .ep-lista {
@@ -1278,7 +1168,7 @@ p {
 
 @media (min-width: 1024px) {
   .ep-passo {
-    min-height: 44vh;
+    min-height: clamp(200px, 26vh, 300px);
     opacity: 0.42;
   }
   .ep-passo.ativo {
@@ -1305,7 +1195,7 @@ p {
 }
 
 /* ==========================================================================
-   10. SEÇÃO 5: SEGURANÇA E CONFIANÇA (COMPONENTE IMAGEM-CORTINA)
+   9. SEÇÃO 5: SEGURANÇA E CONFIANÇA (COMPONENTE IMAGEM-CORTINA)
    ========================================================================== */
 .secao-seguranca {
   padding: var(--respiro-secao) 0;
@@ -1338,14 +1228,23 @@ p {
   margin-bottom: var(--esp-6);
 }
 
-/* Componente imagem-cortina adaptado à superfície de reserva */
+/* Componente imagem-cortina */
 .ic {
   overflow: hidden;
   border-radius: var(--raio);
+  border: 1px solid var(--fio);
+  background: var(--superficie-tinta);
 }
 
-.reserva-seguranca {
-  aspect-ratio: 16 / 10;
+.quadro-seguranca {
+  aspect-ratio: 3 / 2;
+}
+
+.quadro-seguranca img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
 }
 
 .js .ic .ic-alvo {
@@ -1396,7 +1295,7 @@ p {
 }
 
 /* ==========================================================================
-   11. SEÇÃO 6: PERGUNTAS FREQUENTES (COMPONENTE FAQ-ANIMADO)
+   10. SEÇÃO 6: PERGUNTAS FREQUENTES (COMPONENTE FAQ-ANIMADO)
    ========================================================================== */
 .secao-faq {
   padding: var(--respiro-secao) 0;
@@ -1506,7 +1405,7 @@ p {
 }
 
 /* ==========================================================================
-   12. SEÇÃO 7: CHAMADA FINAL E RODAPÉ INSTITUCIONAL
+   11. SEÇÃO 7: CHAMADA FINAL E RODAPÉ INSTITUCIONAL
    ========================================================================== */
 .secao-fechamento {
   background-color: var(--escuro);
@@ -1596,6 +1495,7 @@ p {
   .mu-fio,
   .js .tl-w,
   .cartao-certificado,
+  .cartao-midia img,
   .ep-passo,
   .js .ic .ic-alvo,
   .fq-p,
@@ -1617,13 +1517,8 @@ p {
 <header class="cb" data-cabecalho>
   <div class="conteiner cb-interno">
     <a class="cb-marca" href="#topo" aria-label="LT Certificadora, voltar ao início">
-      <span class="marca-simbolo" aria-hidden="true">
-        <svg viewBox="0 0 48 40" width="32" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 4H16V26H28V34H6V4Z" fill="#5C985C"/>
-          <path d="M18 11H42V19H34V38H24V19H18V11Z" fill="#44509C"/>
-          <circle cx="21" cy="21" r="7" fill="#E8B040"/>
-          <path d="M21 10L22.8 13H19.2L21 10ZM21 32L22.8 29H19.2L21 32ZM10 21L13 19.2V22.8L10 21ZM32 21L29 19.2V22.8L32 21ZM13.2 13.2L16.2 14.5L14.5 16.2L13.2 13.2ZM28.8 28.8L25.8 27.5L27.5 25.8L28.8 28.8ZM28.8 13.2L27.5 16.2L25.8 14.5L28.8 13.2ZM13.2 28.8L14.5 25.8L16.2 27.5L13.2 28.8Z" fill="#E8B040"/>
-        </svg>
+      <span class="marca-simbolo">
+        <img src="imagens/logo-lt.png" alt="" width="132" height="83">
       </span>
       <span>LT<span class="cb-marca-complemento"> Certificadora</span></span>
     </a>
@@ -1656,35 +1551,20 @@ p {
 <main id="conteudo-principal">
 
   <!-- =====================================================================
-       01. ABERTURA (HERO DE TELA CHEIA COM IMAGEM DE FUNDO PONTA A PONTA)
+       01. ABERTURA (HERO DE TELA CHEIA COM FOTOGRAFIA DE FUNDO PONTA A PONTA)
        ===================================================================== -->
   <section class="abertura secao-escura" id="topo">
-    <!-- Camada de fundo de ponta a ponta (100% da largura e altura da Abertura) -->
-    <div class="abertura-fundo" aria-hidden="true">
-      <svg class="abertura-fundo-arte" viewBox="0 0 1600 960" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Feixes de luz solar natural entrando pela direita da cena de fundo -->
-        <polygon points="980,0 1600,0 1600,960 640,960" fill="url(#luzSolarFundo)" opacity="0.55"/>
-        <!-- Linhas arquitetônicas do ambiente de escritório iluminado ao fundo -->
-        <line x1="920" y1="0" x2="920" y2="960" stroke="#E8B040" stroke-opacity="0.18" stroke-dasharray="6 8"/>
-        <line x1="1240" y1="0" x2="1240" y2="960" stroke="#F4F7F5" stroke-opacity="0.12"/>
-        <line x1="680" y1="680" x2="1600" y2="680" stroke="#F4F7F5" stroke-opacity="0.14"/>
-        <!-- Anéis de foco da câmera indicando o enquadramento do sujeito na fotografia de fundo -->
-        <circle cx="1160" cy="410" r="250" stroke="#E8B040" stroke-opacity="0.28" stroke-width="1.5" stroke-dasharray="10 10"/>
-        <circle cx="1160" cy="410" r="170" stroke="#5C985C" stroke-opacity="0.32" stroke-width="1.5"/>
-        <!-- Silhueta arquitetônica do sujeito em videoconferência e notebook na metade direita -->
-        <rect x="960" y="190" width="410" height="470" rx="28" fill="#1C2752" fill-opacity="0.55" stroke="#E8B040" stroke-opacity="0.35" stroke-dasharray="8 8"/>
-        <circle cx="1165" cy="340" r="68" fill="#E8B040" fill-opacity="0.18" stroke="#E8B040" stroke-opacity="0.55" stroke-width="2"/>
-        <path d="M1045 560C1045 492 1098 442 1165 442C1232 442 1285 492 1285 560" fill="#5C985C" fill-opacity="0.22" stroke="#5C985C" stroke-opacity="0.55" stroke-width="2"/>
-        <defs>
-          <linearGradient id="luzSolarFundo" x1="1480" y1="80" x2="760" y2="820" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#E8B040" stop-opacity="0.38"/>
-            <stop offset="50%" stop-color="#44509C" stop-opacity="0.22"/>
-            <stop offset="100%" stop-color="#131B3A" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-      </svg>
+    <div class="abertura-fundo">
+      <img
+        class="abertura-foto-fundo"
+        src="imagens/hero-videoconferencia.jpg"
+        alt="Especialista da LT Certificadora em atendimento por videoconferência em escritório iluminado pela luz do sol"
+        width="1376"
+        height="768"
+        fetchpriority="high"
+        decoding="async"
+      >
     </div>
-    <div class="abertura-enquadramento-fundo" aria-hidden="true"></div>
 
     <div class="conteiner abertura-palco">
       <div class="abertura-grade">
@@ -1701,39 +1581,6 @@ p {
               </span>
             </a>
             <a class="bt-secundario" href="#certificados">Escolher entre A1 e A3</a>
-          </div>
-        </div>
-
-        <div class="abertura-ancora-fundo">
-          <!-- RESERVA DE IMAGEM 01 (HERO DE FUNDO EM TELA CHEIA) -->
-          <div class="reserva-midia ficha-hero-fundo" role="img" aria-label="Área de fundo de ponta a ponta reservada para fotografia principal de atendimento por videoconferência">
-            <div class="reserva-topo">
-              <span class="reserva-etiqueta">Reserva de Imagem 01 · Hero de Fundo (Tela Cheia)</span>
-              <span class="reserva-proporcao">Proporção 16:9 · 100% da Tela</span>
-            </div>
-            <div class="reserva-ficha">
-              <strong>Assunto: Fotografia de fundo de ponta a ponta</strong>
-              <p>A imagem ocupa 100% do fundo da abertura: especialista ou cliente em chamada de vídeo tranquila em ambiente claro iluminado por luz solar à direita, com véu escuro gradual à esquerda para leitura limpa do título.</p>
-            </div>
-            <div class="reserva-rodape">No celular: enquadramento focado no sujeito ao fundo com véu escuro uniforme para contraste do texto</div>
-          </div>
-
-          <!-- ELEMENTO DE ASSINATURA: CARTÃO DE VALIDAÇÃO SOLAR -->
-          <div class="cartao-assinatura" aria-label="Selo de assinatura LT Certificadora">
-            <div class="cartao-assinatura-info">
-              <span class="marca-simbolo" aria-hidden="true">
-                <svg viewBox="0 0 48 40" width="28" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6 4H16V26H28V34H6V4Z" fill="#5C985C"/>
-                  <path d="M18 11H42V19H34V38H24V19H18V11Z" fill="#44509C"/>
-                  <circle cx="21" cy="21" r="7" fill="#E8B040"/>
-                </svg>
-              </span>
-              <div>
-                <strong>Validação por Vídeo · ICP-Brasil</strong>
-                <span>Conferência prévia de documentos pelo WhatsApp</span>
-              </div>
-            </div>
-            <span class="cartao-assinatura-status">Suporte humano</span>
           </div>
         </div>
       </div>
@@ -1781,12 +1628,15 @@ p {
         <!-- Cartão 1: A1 PF -->
         <article class="cartao-certificado">
           <div>
-            <div class="reserva-midia clara reserva-credencial" role="img" aria-label="Área reservada para arte da credencial digital A1 Pessoa Física">
-              <div class="reserva-topo">
-                <span class="reserva-etiqueta">Reserva 02A · Arte Credencial</span>
-                <span class="reserva-proporcao">Proporção 16:7</span>
-              </div>
-              <div class="reserva-rodape">Ilustração de credencial digital e-CPF A1 (arquivo no computador) em Verde LT</div>
+            <div class="cartao-midia">
+              <img
+                src="imagens/credencial-a1-pf.jpg"
+                alt="Escudo digital translúcido em verde e dourado sobre o teclado de um notebook representando o certificado e-CPF A1"
+                width="1376"
+                height="768"
+                loading="lazy"
+                decoding="async"
+              >
             </div>
           </div>
           <div>
@@ -1810,12 +1660,15 @@ p {
         <!-- Cartão 2: A1 PJ (Destaque visual) -->
         <article class="cartao-certificado destaque-pj">
           <div>
-            <div class="reserva-midia reserva-credencial" role="img" aria-label="Área reservada para arte da credencial digital A1 Pessoa Jurídica">
-              <div class="reserva-topo">
-                <span class="reserva-etiqueta">Reserva 02B · Arte Credencial</span>
-                <span class="reserva-proporcao">Proporção 16:7</span>
-              </div>
-              <div class="reserva-rodape">Ilustração de credencial empresarial e-CNPJ A1 com selo Ouro Solar para emissão de notas</div>
+            <div class="cartao-midia">
+              <img
+                src="imagens/credencial-a1-pj.jpg"
+                alt="Selo criptográfico dourado e verde iluminado sobre um notebook escuro representando o certificado empresarial e-CNPJ A1"
+                width="1376"
+                height="768"
+                loading="lazy"
+                decoding="async"
+              >
             </div>
           </div>
           <div>
@@ -1839,12 +1692,15 @@ p {
         <!-- Cartão 3: A3 PF -->
         <article class="cartao-certificado">
           <div>
-            <div class="reserva-midia clara reserva-credencial" role="img" aria-label="Área reservada para arte da credencial física A3 Pessoa Física">
-              <div class="reserva-topo">
-                <span class="reserva-etiqueta">Reserva 02C · Arte Credencial</span>
-                <span class="reserva-proporcao">Proporção 16:7</span>
-              </div>
-              <div class="reserva-rodape">Representação de mídia física (token USB e cartão inteligente) e-CPF A3 em Azul LT</div>
+            <div class="cartao-midia">
+              <img
+                src="imagens/credencial-a3-pf.jpg"
+                alt="Token USB azul metálico ao lado de cartão inteligente com chip dourado representando o certificado e-CPF A3"
+                width="1376"
+                height="768"
+                loading="lazy"
+                decoding="async"
+              >
             </div>
           </div>
           <div>
@@ -1868,12 +1724,15 @@ p {
         <!-- Cartão 4: A3 PJ -->
         <article class="cartao-certificado">
           <div>
-            <div class="reserva-midia clara reserva-credencial" role="img" aria-label="Área reservada para arte da credencial física A3 Pessoa Jurídica">
-              <div class="reserva-topo">
-                <span class="reserva-etiqueta">Reserva 02D · Arte Credencial</span>
-                <span class="reserva-proporcao">Proporção 16:7</span>
-              </div>
-              <div class="reserva-rodape">Representação de mídia física (token USB e cartão inteligente) e-CNPJ A3 em Azul LT</div>
+            <div class="cartao-midia">
+              <img
+                src="imagens/credencial-a3-pj.jpg"
+                alt="Leitora de cartão inteligente azul e dourada com cartão inserido ao lado de token USB representando o certificado e-CNPJ A3"
+                width="1376"
+                height="768"
+                loading="lazy"
+                decoding="async"
+              >
             </div>
           </div>
           <div>
@@ -1984,17 +1843,18 @@ p {
           <span data-etapa-contador>01 / 03</span>
         </div>
 
-        <!-- RESERVA DE IMAGEM 03 (PAINEL DE PROCESSO) -->
-        <div class="reserva-midia clara reserva-etapa-painel" role="img" aria-label="Área reservada para cena visual das 3 etapas da emissão por videoconferência">
-          <div class="reserva-topo">
-            <span class="reserva-etiqueta">Reserva de Imagem 03 · Painel do Processo</span>
-            <span class="reserva-proporcao">Proporção 16:10</span>
-          </div>
-          <div class="reserva-ficha">
+        <div class="painel-etapa-midia">
+          <img
+            src="imagens/processo-videoconferencia.jpg"
+            alt="Mesa de trabalho iluminada pela luz da manhã com notebook e smartphone posicionados para videoconferência"
+            width="1376"
+            height="768"
+            loading="lazy"
+            decoding="async"
+          >
+          <div class="painel-etapa-legenda">
             <strong data-etapa-legenda>Etapa 01: Conferência rápida no WhatsApp</strong>
-            <p>Composição mostrando a jornada de atendimento humano (conferência de documentos, chamada de vídeo e certificado emitido com selo solar).</p>
           </div>
-          <div class="reserva-rodape">No celular: aparece acima da lista de passos em coluna única</div>
         </div>
 
         <a class="bt bt-rolo" href="https://api.whatsapp.com/send?phone=557381223553&text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20seu%20site" target="_blank" rel="noopener noreferrer">
@@ -2035,19 +1895,16 @@ p {
         <h2>Segurança jurídica oficial com atendimento descomplicado de ponta a ponta.</h2>
         <p>Unimos os padrões técnicos exigidos nacionalmente com um atendimento próximo, que fala a sua língua.</p>
 
-        <!-- RESERVA DE IMAGEM 04 COM REVELAÇÃO POR CORTINA -->
-        <figure class="ic" data-cortina="baixo">
-          <div class="reserva-midia reserva-seguranca ic-alvo" role="img" aria-label="Área reservada para fotografia de suporte consultivo com selo ICP-Brasil">
-            <div class="reserva-topo">
-              <span class="reserva-etiqueta">Reserva de Imagem 04 · Fotografia com Cortina</span>
-              <span class="reserva-proporcao">Proporção 16:10</span>
-            </div>
-            <div class="reserva-ficha">
-              <strong>Assunto: Especialista acompanhando a validação</strong>
-              <p>Cena de mesa de trabalho organizada com notebook e documento sendo validado, revelada suavemente por cortina ao entrar na tela.</p>
-            </div>
-            <div class="reserva-rodape">Efeito aplicado: revelação por cortina suave (desligado em movimento reduzido)</div>
-          </div>
+        <figure class="ic quadro-seguranca" data-cortina="baixo">
+          <img
+            class="ic-alvo"
+            src="imagens/seguranca-consultiva.jpg"
+            alt="Empresário brasileiro sorrindo em escritório iluminado pelo sol diante do notebook após concluir validação digital"
+            width="1264"
+            height="848"
+            loading="lazy"
+            decoding="async"
+          >
         </figure>
       </div>
 
@@ -2183,12 +2040,8 @@ p {
 
     <div class="rodape-interno">
       <a class="cb-marca" href="#topo">
-        <span class="marca-simbolo" aria-hidden="true">
-          <svg viewBox="0 0 48 40" width="32" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 4H16V26H28V34H6V4Z" fill="#5C985C"/>
-            <path d="M18 11H42V19H34V38H24V19H18V11Z" fill="#44509C"/>
-            <circle cx="21" cy="21" r="7" fill="#E8B040"/>
-          </svg>
+        <span class="marca-simbolo">
+          <img src="imagens/logo-lt.png" alt="" width="132" height="83">
         </span>
         <span>LT Certificadora</span>
       </a>
